@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Crave Restaurant</title>
+  <link rel="stylesheet" href="src/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN+Guides&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <div class="menu-hero">
+    <div class="menu-hero-content">
+      <h1 class="menu-title">Our Menu</h1>
+      <p class="menu-subtitle">Discover our delicious dishes crafted with passion</p>
+    </div>
+  </div>
+
+  <div class="menu-container">
+    <div class="menu-filters">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="appetizers">Appetizers</button>
+      <button class="filter-btn" data-category="main-courses">Main Courses</button>
+      <button class="filter-btn" data-category="desserts">Desserts</button>
+      <button class="filter-btn" data-category="beverages">Beverages</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- Menu items will be loaded here -->
+    </div>
+  </div>
+
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Your Order</h3>
+      <button class="close-cart" id="closeCart">×</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <!-- Cart items will be displayed here -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+    </div>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <script src="src/menu.js"></script>
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+        // Update active nav link
+        const menuLink = document.querySelector('a[href="#"]');
+        if (menuLink && menuLink.textContent === 'Menu') {
+          menuLink.href = 'menu.html';
+          menuLink.classList.add('active');
+        }
+      });
+  </script>
+</body>
+</html> 

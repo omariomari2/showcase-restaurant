@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Crave Restaurant</title>
+  <link rel="stylesheet" href="src/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN+Guides&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <div class="about-hero">
+    <div class="about-hero-content">
+      <h1 class="about-hero-title">Our Story</h1>
+      <p class="about-hero-subtitle">A journey of passion, tradition, and culinary excellence</p>
+    </div>
+  </div>
+
+  <div class="about-container">
+    <div class="about-section">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>Welcome to Crave</h2>
+          <p>Founded in 2010, Crave Restaurant has been serving the finest Ghanaian and international cuisine to our beloved community in Accra. What started as a small family kitchen has grown into one of the most beloved dining destinations in the city.</p>
+          <p>Our commitment to quality ingredients, authentic recipes, and exceptional service has made us a favorite among locals and visitors alike. Every dish tells a story of tradition, innovation, and the love we put into our craft.</p>
+        </div>
+        <div class="about-image">
+          <img src="src/images/collage.png" alt="Restaurant Interior" />
+        </div>
+      </div>
+    </div>
+
+    <div class="values-section">
+      <h2>Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🍽️</div>
+          <h3>Quality</h3>
+          <p>We source only the finest ingredients and maintain the highest standards in food preparation.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">👨‍🍳</div>
+          <h3>Tradition</h3>
+          <p>We honor traditional recipes while embracing modern culinary techniques and innovations.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">❤️</div>
+          <h3>Community</h3>
+          <p>We're proud to be part of the Accra community and give back through various initiatives.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🌟</div>
+          <h3>Excellence</h3>
+          <p>Every detail matters - from the ambiance to the service, we strive for excellence in all we do.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-section">
+      <h2>Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-avatar">
+            <img src="src/images/jollof.png" alt="Chef Kwame" />
+          </div>
+          <h3>Chef Kwame</h3>
+          <p>Head Chef</p>
+          <p>With over 15 years of culinary experience, Chef Kwame brings passion and expertise to every dish.</p>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">
+            <img src="src/images/burger.png" alt="Sarah" />
+          </div>
+          <h3>Sarah</h3>
+          <p>Restaurant Manager</p>
+          <p>Sarah ensures every guest has an exceptional dining experience from start to finish.</p>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">
+            <img src="src/images/stats.png" alt="Michael" />
+          </div>
+          <h3>Michael</h3>
+          <p>Sous Chef</p>
+          <p>Michael's creativity and attention to detail make our menu truly special.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+        // Update active nav link
+        const aboutLink = document.querySelector('a[href="about.html"]');
+        if (aboutLink) {
+          aboutLink.classList.add('active');
+        }
+      });
+  </script>
+</body>
+</html> 

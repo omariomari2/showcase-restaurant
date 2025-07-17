@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Crave Restaurant</title>
+  <link rel="stylesheet" href="src/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN+Guides&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="logo">
+          <svg width="48" height="48" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="18" fill="url(#paint0_linear)"/>
+            <path d="M12 18c0-3.31 2.69-6 6-6 1.66 0 3.14.69 4.22 1.8" stroke="#FF9900" stroke-width="2" fill="none"/>
+            <path d="M24 18c0 3.31-2.69 6-6 6-1.66 0-3.14-.69-4.22-1.8" stroke="#FF9900" stroke-width="2" fill="none"/>
+            <defs>
+              <linearGradient id="paint0_linear" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFB347"/>
+                <stop offset="1" stop-color="#FF9900"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-text">Crave</span>
+        </div>
+        <h1>Admin Login</h1>
+        <p>Enter your credentials to access the admin panel</p>
+      </div>
+      
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+      
+      <div class="login-footer">
+        <a href="index.html" class="back-link">← Back to Website</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="errorModal" class="modal">
+    <div class="modal-content">
+      <h3>Login Failed</h3>
+      <p>Invalid username or password. Please try again.</p>
+      <button class="modal-btn" onclick="closeErrorModal()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      // Check credentials
+      if (username === 'admin' && password === 'adminaccess') {
+        // Set login status
+        localStorage.setItem('adminLoggedIn', 'true');
+        localStorage.setItem('adminLoginTime', new Date().toISOString());
+        
+        // Redirect to admin panel
+        window.location.href = 'admin.html';
+      } else {
+        // Show error modal
+        showErrorModal();
+      }
+    });
+    
+    function showErrorModal() {
+      const modal = document.getElementById('errorModal');
+      modal.style.display = 'flex';
+      setTimeout(() => modal.classList.add('show'), 10);
+    }
+    
+    function closeErrorModal() {
+      const modal = document.getElementById('errorModal');
+      modal.classList.remove('show');
+      setTimeout(() => modal.style.display = 'none', 300);
+    }
+    
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+      const modal = document.getElementById('errorModal');
+      if (e.target === modal) {
+        closeErrorModal();
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeErrorModal();
+      }
+    });
+    
+    // Check if already logged in
+    if (localStorage.getItem('adminLoggedIn') === 'true') {
+      window.location.href = 'admin.html';
+    }
+  </script>
+</body>
+</html> 
