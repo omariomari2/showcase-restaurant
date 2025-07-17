@@ -3,237 +3,301 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart Demo - Crave Restaurant</title>
+  <title>Your Cart - Crave Restaurant</title>
   <link rel="stylesheet" href="src/index.css">
   <link rel="stylesheet" href="src/cart.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN+Guides&display=swap" rel="stylesheet">
   <style>
-    .demo-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-    
-    .demo-header {
+    /* Cart page specific styles */
+    .cart-page-hero {
+      background: linear-gradient(135deg, #FFB347 0%, #FF9900 100%);
+      color: white;
+      padding: 80px 20px;
       text-align: center;
-      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
     }
-    
-    .demo-header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #2c3e50;
+
+    .cart-page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+      opacity: 0.3;
     }
-    
-    .demo-header p {
-      font-size: 1.1rem;
-      color: #7f8c8d;
+
+    .cart-page-title {
+      font-family: 'Playwrite VN Guides', 'Montserrat', Arial, sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      position: relative;
+      z-index: 1;
     }
-    
-    .demo-items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-bottom: 40px;
+
+    .cart-page-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin: 0;
+      position: relative;
+      z-index: 1;
     }
-    
-    .demo-item {
+
+    .cart-page-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .cart-content {
       background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
     }
-    
-    .demo-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+    .cart-header-section {
+      background: linear-gradient(135deg, #FFB347 0%, #FF9900 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
     }
-    
-    .demo-item-image {
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 10px;
-      margin-bottom: 20px;
+
+    .cart-header-section h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .cart-items-section {
+      padding: 0;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 25px 30px;
+      border-bottom: 1px solid #f1f2f6;
+      transition: background-color 0.2s ease;
+    }
+
+    .cart-item:hover {
+      background-color: #f8f9fa;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #FF9900;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8f9fa;
+      padding: 8px 16px;
+      border-radius: 25px;
+    }
+
+    .quantity-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: white;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 3rem;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
     }
-    
-    .demo-item h3 {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
+
+    .quantity-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .quantity-value {
+      font-weight: 600;
+      min-width: 30px;
+      text-align: center;
       color: #2c3e50;
     }
-    
-    .demo-item p {
-      color: #7f8c8d;
-      margin-bottom: 20px;
-      line-height: 1.6;
+
+    .remove-item {
+      background: none;
+      border: none;
+      color: #e74c3c;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
     }
-    
-    .demo-item-footer {
+
+    .remove-item:hover {
+      background-color: #fdf2f2;
+    }
+
+    .cart-footer-section {
+      background: #f8f9fa;
+      padding: 30px;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .cart-total {
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-    
-    .demo-item-price {
-      font-size: 1.2rem;
+      margin-bottom: 25px;
+      font-size: 1.3rem;
       font-weight: 600;
-      color: #e74c3c;
     }
-    
-    .demo-add-btn {
-      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+
+    .cart-total-amount {
+      color: #FF9900;
+      font-size: 1.5rem;
+    }
+
+    .cart-checkout-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #FFB347 0%, #FF9900 100%);
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 25px;
-      cursor: pointer;
+      border-radius: 12px;
+      font-size: 1.1rem;
       font-weight: 600;
+      cursor: pointer;
       transition: all 0.3s ease;
     }
-    
-    .demo-add-btn:hover {
+
+    .cart-checkout-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+      box-shadow: 0 8px 25px rgba(255, 153, 0, 0.4);
     }
-    
-    .demo-instructions {
-      background: #f8f9fa;
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 40px;
+
+    .cart-empty {
+      padding: 60px 30px;
+      text-align: center;
+      color: #6c757d;
     }
-    
-    .demo-instructions h2 {
+
+    .cart-empty svg {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    .cart-empty h3 {
+      margin: 0 0 10px 0;
       color: #2c3e50;
-      margin-bottom: 15px;
     }
-    
-    .demo-instructions ul {
-      list-style: none;
-      padding: 0;
+
+    .cart-empty p {
+      margin: 0;
+      font-size: 1rem;
     }
-    
-    .demo-instructions li {
-      padding: 8px 0;
-      color: #7f8c8d;
-      position: relative;
-      padding-left: 25px;
+
+    .back-to-menu {
+      text-align: center;
+      margin-top: 30px;
     }
-    
-    .demo-instructions li:before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: #27ae60;
-      font-weight: bold;
+
+    .back-to-menu a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #FF9900;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 24px;
+      border: 2px solid #FF9900;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-menu a:hover {
+      background: #FF9900;
+      color: white;
+    }
+
+    /* Hide the floating cart component */
+    .cart-component {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .cart-page-title {
+        font-size: 2.5rem;
+      }
+      
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .cart-item-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
     }
   </style>
 </head>
 <body>
   <div id="navbar-container"></div>
 
-  <div class="demo-container">
-    <div class="demo-header">
-      <h1>Cart Component Demo</h1>
-      <p>Test our new cart functionality by adding items to your cart</p>
+  <div class="cart-page-hero">
+    <h1 class="cart-page-title">Your Cart</h1>
+    <p class="cart-page-subtitle">Review your delicious selections</p>
+  </div>
+
+  <div class="cart-page-container">
+    <div class="cart-content" id="cart-content">
+      <!-- Cart content will be dynamically generated -->
     </div>
-
-    <div class="demo-instructions">
-      <h2>How to test the cart:</h2>
-      <ul>
-        <li>Click "Add to Cart" on any item below</li>
-        <li>Notice the cart button in the bottom right corner</li>
-        <li>Click the cart button to expand the cart panel</li>
-        <li>Try increasing/decreasing quantities or removing items</li>
-        <li>Click outside the cart panel to close it</li>
-        <li>Your cart persists across page refreshes</li>
-      </ul>
-      <div style="margin-top: 20px; text-align: center;">
-        <button onclick="testCartToggle()" style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-          Test Cart Toggle
-        </button>
-      </div>
-    </div>
-
-    <div class="demo-items">
-      <div class="demo-item">
-        <div class="demo-item-image">🍕</div>
-        <h3>Margherita Pizza</h3>
-        <p>Classic Italian pizza with fresh mozzarella, tomato sauce, and basil</p>
-        <div class="demo-item-footer">
-          <span class="demo-item-price">$18.99</span>
-          <button class="demo-add-btn" onclick="addDemoItem('Margherita Pizza', 18.99, '🍕')">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-
-      <div class="demo-item">
-        <div class="demo-item-image">🍔</div>
-        <h3>Classic Burger</h3>
-        <p>Juicy beef patty with lettuce, tomato, cheese, and special sauce</p>
-        <div class="demo-item-footer">
-          <span class="demo-item-price">$14.99</span>
-          <button class="demo-add-btn" onclick="addDemoItem('Classic Burger', 14.99, '🍔')">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-
-      <div class="demo-item">
-        <div class="demo-item-image">🍝</div>
-        <h3>Spaghetti Carbonara</h3>
-        <p>Traditional pasta with eggs, cheese, pancetta, and black pepper</p>
-        <div class="demo-item-footer">
-          <span class="demo-item-price">$16.99</span>
-          <button class="demo-add-btn" onclick="addDemoItem('Spaghetti Carbonara', 16.99, '🍝')">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-
-      <div class="demo-item">
-        <div class="demo-item-image">🥗</div>
-        <h3>Caesar Salad</h3>
-        <p>Fresh romaine lettuce with Caesar dressing, croutons, and parmesan</p>
-        <div class="demo-item-footer">
-          <span class="demo-item-price">$12.99</span>
-          <button class="demo-add-btn" onclick="addDemoItem('Caesar Salad', 12.99, '🥗')">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-
-      <div class="demo-item">
-        <div class="demo-item-image">🍰</div>
-        <h3>Chocolate Cake</h3>
-        <p>Rich chocolate cake with vanilla ice cream and chocolate sauce</p>
-        <div class="demo-item-footer">
-          <span class="demo-item-price">$8.99</span>
-          <button class="demo-add-btn" onclick="addDemoItem('Chocolate Cake', 8.99, '🍰')">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-
-      <div class="demo-item">
-        <div class="demo-item-image">🥤</div>
-        <h3>Fresh Lemonade</h3>
-        <p>Refreshing homemade lemonade with mint and a hint of sweetness</p>
-        <div class="demo-item-footer">
-          <span class="demo-item-price">$4.99</span>
-          <button class="demo-add-btn" onclick="addDemoItem('Fresh Lemonade', 4.99, '🥤')">
-            Add to Cart
-          </button>
-        </div>
-      </div>
+    
+    <div class="back-to-menu">
+      <a href="menu.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to Menu
+      </a>
     </div>
   </div>
 
@@ -241,41 +305,115 @@
   <script>
     // Load navbar
     fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-container').innerHTML = data;
-      });
+      .then(r => r.text())
+      .then(html => (document.getElementById('navbar-container').innerHTML = html));
 
-    // Function to add demo items to cart
-    function addDemoItem(name, price, emoji) {
-      const item = {
-        id: `demo-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`, // Generate unique ID
-        name: name,
-        price: parseFloat(price),
-        image: `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="50" y="50" font-size="50" text-anchor="middle" dy=".35em">${emoji}</text></svg>`,
-        description: `Delicious ${name.toLowerCase()}`
-      };
+    // Custom cart display for the page
+    function updateCartPageDisplay() {
+      const cartContent = document.getElementById('cart-content');
+      if (!cartContent || !cartManager) return;
+
+      const cart = cartManager.getCart();
       
-      console.log('Adding item to cart:', item);
+      if (cart.length === 0) {
+        cartContent.innerHTML = `
+          <div class="cart-header-section">
+            <h2>Your Cart</h2>
+          </div>
+          <div class="cart-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <h3>Your cart is empty</h3>
+            <p>Add some delicious items from our menu to get started!</p>
+          </div>
+        `;
+        return;
+      }
+
+      const total = cartManager.getCartTotal();
       
+      cartContent.innerHTML = `
+        <div class="cart-header-section">
+          <h2>Your Cart (${cart.length} item${cart.length > 1 ? 's' : ''})</h2>
+        </div>
+        <div class="cart-items-section">
+          ${cart.map(item => {
+            const itemName = item.name || 'Unknown Item';
+            const itemPrice = parseFloat(item.price) || 0;
+            const itemQuantity = parseInt(item.quantity) || 1;
+            const totalPrice = (itemPrice * itemQuantity).toFixed(2);
+            
+            return `
+              <div class="cart-item" data-id="${item.id}">
+                <div class="cart-item-details">
+                  <div class="cart-item-name">${itemName}</div>
+                  <div class="cart-item-price">$${totalPrice}</div>
+                </div>
+                <div class="cart-item-controls">
+                  <div class="cart-item-quantity">
+                    <button class="quantity-btn" onclick="updateItemQuantity('${item.id}', ${itemQuantity - 1})">-</button>
+                    <span class="quantity-value">${itemQuantity}</span>
+                    <button class="quantity-btn" onclick="updateItemQuantity('${item.id}', ${itemQuantity + 1})">+</button>
+                  </div>
+                  <button class="remove-item" onclick="removeCartItem('${item.id}')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+        <div class="cart-footer-section">
+          <div class="cart-total">
+            <span>Total:</span>
+            <span class="cart-total-amount">$${total.toFixed(2)}</span>
+          </div>
+          <button class="cart-checkout-btn" onclick="proceedToCheckout()">
+            Proceed to Checkout
+          </button>
+        </div>
+      `;
+    }
+
+    function updateItemQuantity(itemId, newQuantity) {
       if (cartManager) {
-        cartManager.addToCart(item);
-      } else {
-        // Fallback if cart manager is not available
-        alert('Cart manager not available. Please refresh the page.');
+        cartManager.updateQuantity(itemId, newQuantity);
+        updateCartPageDisplay();
       }
     }
 
-    // Test function to manually toggle cart
-    function testCartToggle() {
-      console.log('Testing cart toggle...');
-      console.log('Cart manager:', cartManager);
+    function removeCartItem(itemId) {
       if (cartManager) {
-        cartManager.toggleCart();
-      } else {
-        alert('Cart manager not available');
+        cartManager.removeFromCart(itemId);
+        updateCartPageDisplay();
       }
     }
+
+    function proceedToCheckout() {
+      if (cartManager && cartManager.getCart().length > 0) {
+        const total = cartManager.getCartTotal();
+        alert(`Proceeding to checkout with total: $${total.toFixed(2)}`);
+        // Here you would redirect to checkout page
+        // window.location.href = '/checkout.html';
+      } else {
+        alert('Your cart is empty!');
+      }
+    }
+
+    // Initialize cart page display
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        if (cartManager) {
+          updateCartPageDisplay();
+        }
+      }, 500);
+    });
   </script>
 </body>
 </html> 

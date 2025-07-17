@@ -106,7 +106,15 @@ class CartManager {
       cartCheckout.addEventListener('click', () => this.checkout());
     }
 
-    // Close cart when clicking outside
+    // Prevent clicks inside the cart panel from bubbling up to the
+    // document-level listener that closes the cart.
+    if (cartPanel) {
+      cartPanel.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    // Close cart when clicking anywhere outside the component
     document.addEventListener('click', (e) => {
       const cartComponent = document.getElementById('cart-component');
       if (cartComponent && !cartComponent.contains(e.target)) {
