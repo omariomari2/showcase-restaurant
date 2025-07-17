@@ -106,7 +106,11 @@ const checkoutBtn = document.getElementById('checkoutBtn');
 document.addEventListener('DOMContentLoaded', function() {
   loadMenuItems(); // Load menu items first
   displayMenuItems('all');
-  updateCartDisplay();
+  
+  // Only update cart display if using local cart system
+  if (!window.cartManager) {
+    updateCartDisplay();
+  }
   
   // Set minimum date for date inputs
   const today = new Date().toISOString().split('T')[0];
@@ -169,23 +173,30 @@ filterBtns.forEach(btn => {
   });
 });
 
-// Cart functionality
+// Cart functionality - integrated with new cart component
 function addToCart(itemId) {
   const item = menuItems.find(item => item.id === itemId);
   if (!item) return;
   
-  const existingItem = cart.find(cartItem => cartItem.id === itemId);
-  
-  if (existingItem) {
-    existingItem.quantity += 1;
+  // Use the global cart manager if available
+  if (typeof cartManager !== 'undefined' && cartManager) {
+    cartManager.addToCart(item);
   } else {
-    cart.push({
-      ...item,
-      quantity: 1
-    });
+    // Fallback to local cart system
+    const existingItem = cart.find(cartItem => cartItem.id === itemId);
+    
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({
+        ...item,
+        quantity: 1
+      });
+    }
+    
+    updateCartDisplay();
   }
   
-  updateCartDisplay();
   showCartNotification();
 }
 

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu - Crave Restaurant</title>
   <link rel="stylesheet" href="src/index.css">
+  <link rel="stylesheet" href="src/cart.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,25 +35,9 @@
     </div>
   </div>
 
-  <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-      <h3>Your Order</h3>
-      <button class="close-cart" id="closeCart">×</button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <!-- Cart items will be displayed here -->
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">
-        <span>Total:</span>
-        <span id="cartTotal">$0.00</span>
-      </div>
-      <button class="checkout-btn" id="checkoutBtn">Checkout</button>
-    </div>
-  </div>
+  <!-- Old cart sidebar removed - using new cart component instead -->
 
-  <div class="cart-overlay" id="cartOverlay"></div>
-
+  <script src="src/cart.js"></script>
   <script src="src/menu.js"></script>
   <script>
     fetch('navbar.html')

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart Demo - Crave Restaurant</title>
+  <link rel="stylesheet" href="src/index.css">
+  <link rel="stylesheet" href="src/cart.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+  <style>
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .demo-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .demo-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    
+    .demo-header p {
+      font-size: 1.1rem;
+      color: #7f8c8d;
+    }
+    
+    .demo-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .demo-item {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .demo-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .demo-item-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+    
+    .demo-item h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    
+    .demo-item p {
+      color: #7f8c8d;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .demo-item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .demo-item-price {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #e74c3c;
+    }
+    
+    .demo-add-btn {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .demo-add-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+    
+    .demo-instructions {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .demo-instructions h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+    
+    .demo-instructions ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .demo-instructions li {
+      padding: 8px 0;
+      color: #7f8c8d;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .demo-instructions li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #27ae60;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <div class="demo-container">
+    <div class="demo-header">
+      <h1>Cart Component Demo</h1>
+      <p>Test our new cart functionality by adding items to your cart</p>
+    </div>
+
+    <div class="demo-instructions">
+      <h2>How to test the cart:</h2>
+      <ul>
+        <li>Click "Add to Cart" on any item below</li>
+        <li>Notice the cart button in the bottom right corner</li>
+        <li>Click the cart button to expand the cart panel</li>
+        <li>Try increasing/decreasing quantities or removing items</li>
+        <li>Click outside the cart panel to close it</li>
+        <li>Your cart persists across page refreshes</li>
+      </ul>
+      <div style="margin-top: 20px; text-align: center;">
+        <button onclick="testCartToggle()" style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+          Test Cart Toggle
+        </button>
+      </div>
+    </div>
+
+    <div class="demo-items">
+      <div class="demo-item">
+        <div class="demo-item-image">🍕</div>
+        <h3>Margherita Pizza</h3>
+        <p>Classic Italian pizza with fresh mozzarella, tomato sauce, and basil</p>
+        <div class="demo-item-footer">
+          <span class="demo-item-price">$18.99</span>
+          <button class="demo-add-btn" onclick="addDemoItem('Margherita Pizza', 18.99, '🍕')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="demo-item">
+        <div class="demo-item-image">🍔</div>
+        <h3>Classic Burger</h3>
+        <p>Juicy beef patty with lettuce, tomato, cheese, and special sauce</p>
+        <div class="demo-item-footer">
+          <span class="demo-item-price">$14.99</span>
+          <button class="demo-add-btn" onclick="addDemoItem('Classic Burger', 14.99, '🍔')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="demo-item">
+        <div class="demo-item-image">🍝</div>
+        <h3>Spaghetti Carbonara</h3>
+        <p>Traditional pasta with eggs, cheese, pancetta, and black pepper</p>
+        <div class="demo-item-footer">
+          <span class="demo-item-price">$16.99</span>
+          <button class="demo-add-btn" onclick="addDemoItem('Spaghetti Carbonara', 16.99, '🍝')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="demo-item">
+        <div class="demo-item-image">🥗</div>
+        <h3>Caesar Salad</h3>
+        <p>Fresh romaine lettuce with Caesar dressing, croutons, and parmesan</p>
+        <div class="demo-item-footer">
+          <span class="demo-item-price">$12.99</span>
+          <button class="demo-add-btn" onclick="addDemoItem('Caesar Salad', 12.99, '🥗')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="demo-item">
+        <div class="demo-item-image">🍰</div>
+        <h3>Chocolate Cake</h3>
+        <p>Rich chocolate cake with vanilla ice cream and chocolate sauce</p>
+        <div class="demo-item-footer">
+          <span class="demo-item-price">$8.99</span>
+          <button class="demo-add-btn" onclick="addDemoItem('Chocolate Cake', 8.99, '🍰')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="demo-item">
+        <div class="demo-item-image">🥤</div>
+        <h3>Fresh Lemonade</h3>
+        <p>Refreshing homemade lemonade with mint and a hint of sweetness</p>
+        <div class="demo-item-footer">
+          <span class="demo-item-price">$4.99</span>
+          <button class="demo-add-btn" onclick="addDemoItem('Fresh Lemonade', 4.99, '🥤')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/cart.js"></script>
+  <script>
+    // Load navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      });
+
+    // Function to add demo items to cart
+    function addDemoItem(name, price, emoji) {
+      const item = {
+        id: `demo-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`, // Generate unique ID
+        name: name,
+        price: parseFloat(price),
+        image: `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="50" y="50" font-size="50" text-anchor="middle" dy=".35em">${emoji}</text></svg>`,
+        description: `Delicious ${name.toLowerCase()}`
+      };
+      
+      console.log('Adding item to cart:', item);
+      
+      if (cartManager) {
+        cartManager.addToCart(item);
+      } else {
+        // Fallback if cart manager is not available
+        alert('Cart manager not available. Please refresh the page.');
+      }
+    }
+
+    // Test function to manually toggle cart
+    function testCartToggle() {
+      console.log('Testing cart toggle...');
+      console.log('Cart manager:', cartManager);
+      if (cartManager) {
+        cartManager.toggleCart();
+      } else {
+        alert('Cart manager not available');
+      }
+    }
+  </script>
+</body>
+</html> 
