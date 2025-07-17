@@ -14,36 +14,6 @@
 <body>
   <div id="navbar-container" class="fade-in fade-in-delay-1"></div>
 
-  <div class="custom-circular-text-wrapper fade-in fade-in-delay-3">
-    <div class="custom-circular-text-container">
-      <svg viewBox="0 0 200 200">
-        <path id="customTextPath" d="M20,100a80,80 0 1,1 160,0a80,80 0 1,1 -160,0" fill="none" stroke="none" />
-        <text>
-          <textPath href="#customTextPath" startOffset="50%" text-anchor="middle" font-size="12">
-            BEST FOOD FOR THE BEST PEOPLE AT THE BEST PRICES •
-          </textPath>
-        </text>
-      </svg>
-    </div>
-  </div>
-  <div class="order-now-circular-btn-bottomleft fade-in fade-in-delay-3">
-    <div class="order-now-circular-text">
-      <svg viewBox="0 0 200 200">
-        <path id="orderNowTextPath" d="M100,20 a80,80 0 1,1 -0.1,0" fill="none" />
-        <text font-size="18" font-family="'Montserrat', Arial, sans-serif" fill="#222" letter-spacing="3">
-          <textPath href="#orderNowTextPath" startOffset="0">
-            ORDER NOW - ORDER NOW - ORDER NOW -
-          </textPath>
-        </text>
-      </svg>
-    </div>
-    <button class="order-now-btn-center">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="12" fill="black"/>
-        <path d="M8 12h8m0 0l-4-4m4 4l-4 4" stroke="#fff"/>
-      </svg>
-    </button>
-  </div>
   <section class="landing-section">
     <div class="restaurant-motto">Where we all eat and enjoy</div>
     <h1 class="landing-title">RESTAURANT
@@ -94,6 +64,36 @@
     <!-- <div class="burger-image-container" id="burger-image-container">
       <img src="src/images/burger.png" alt="Burger" class="burger-image" />
     </div> -->
+    <div class="custom-circular-text-wrapper fade-in fade-in-delay-3">
+      <div class="custom-circular-text-container">
+        <svg viewBox="0 0 200 200">
+          <path id="customTextPath" d="M20,100a80,80 0 1,1 160,0a80,80 0 1,1 -160,0" fill="none" stroke="none" />
+          <text>
+            <textPath href="#customTextPath" startOffset="50%" text-anchor="middle" font-size="12">
+              BEST FOOD FOR THE BEST PEOPLE AT THE BEST PRICES •
+            </textPath>
+          </text>
+        </svg>
+      </div>
+    </div>
+    <div class="order-now-circular-btn-bottomright fade-in fade-in-delay-3">
+      <div class="order-now-circular-text">
+        <svg viewBox="0 0 200 200">
+          <path id="orderNowTextPath" d="M100,20 a80,80 0 1,1 -0.1,0" fill="none" />
+          <text font-size="18" font-family="'Montserrat', Arial, sans-serif" fill="#222" letter-spacing="3">
+            <textPath href="#orderNowTextPath" startOffset="0">
+              ORDER NOW - ORDER NOW - ORDER NOW -
+            </textPath>
+          </text>
+        </svg>
+      </div>
+      <button class="order-now-btn-center">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="12" fill="black"/>
+          <path d="M8 12h8m0 0l-4-4m4 4l-4 4" stroke="#fff"/>
+        </svg>
+      </button>
+    </div>
   </section>
   <img src="src/images/collage.png" alt="Collage" class="collage-image-farleft"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -134,7 +134,7 @@
         rating.classList.add('rating-move-in');
       }
       // Add order-now-move-in to order-now button
-      var orderNow = document.querySelector('.order-now-circular-btn-bottomleft');
+      var orderNow = document.querySelector('.order-now-circular-btn-bottomright');
       if (orderNow) {
         orderNow.classList.add('order-now-move-in');
       }
