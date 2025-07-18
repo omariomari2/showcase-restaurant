@@ -212,8 +212,8 @@ class Navbar {
           <h3 class="font-semibold text-gray-900 mb-1">Join ${this.options.brandName}</h3>
           <p class="text-sm text-gray-600 mb-4">Sign up for exclusive offers and faster checkout</p>
           <div class="space-y-2">
-            <button class="w-full bg-orange-500 text-white py-3 rounded-lg font-medium">Sign Up</button>
-            <button class="w-full text-gray-600 py-2">Sign In</button>
+            <a href="login.html" class="block w-full bg-orange-500 text-white py-3 rounded-lg font-medium text-center">Sign Up</a>
+            <a href="login.html" class="block w-full text-gray-600 py-2 text-center">Sign In</a>
           </div>
         </div>
         <div class="text-xs text-gray-500 mt-4">
