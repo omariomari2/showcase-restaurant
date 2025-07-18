@@ -398,34 +398,43 @@
       const products = getProducts().filter(product => product.category === category);
       const container = document.getElementById(containerId);
       if (!container) return;
-      
+
       if (!products.length) {
         container.innerHTML = '<p class="text-neutral-500">No products available in this category.</p>';
         return;
       }
-      
-      let html = '';
-      products.forEach(product => {
-        html += `<div class="group border rounded-2xl p-4 bg-neutral-50 flex flex-col">
-          <div class="relative overflow-hidden bg-neutral-100 rounded-3xl mb-4">
-            <div class="aspect-[3/4]">
-              <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-            </div>
-          </div>
-          <div class="px-2 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="font-medium mb-2">${product.name}</h3>
-              <span class="text-sm text-neutral-500 block mb-2">${product.category}</span>
-              <span class="text-lg font-serif font-medium">$${product.price.toFixed(2)}</span>
-            </div>
-            <button class="add-to-cart-btn w-full bg-emerald-600 text-white py-2 mt-4 rounded-full font-medium hover:bg-emerald-700 transition" data-pid="${product.id}">Add to Cart</button>
-          </div>
-        </div>`;
+
+      let productsHtml = '';
+      products.forEach((product, index) => {
+        const isHidden = index >= 4;
+        productsHtml +=
+          '<div class="group border rounded-2xl p-4 bg-neutral-50 flex flex-col product-item ' + (isHidden ? 'hidden' : '') + '" data-category="' + category + '">' +
+            '<div class="relative overflow-hidden bg-neutral-100 rounded-3xl mb-4">' +
+              '<div class="aspect-[3/4]">' +
+                '<img src="' + product.image + '" alt="' + product.name + '" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">' +
+              '</div>' +
+            '</div>' +
+            '<div class="px-2 flex-1 flex flex-col justify-between">' +
+              '<div>' +
+                '<h3 class="font-medium mb-2">' + product.name + '</h3>' +
+                '<span class="text-sm text-neutral-500 block mb-2">' + product.category + '</span>' +
+                '<span class="text-lg font-serif font-medium">$' + product.price.toFixed(2) + '</span>' +
+              '</div>' +
+              '<button class="add-to-cart-btn w-full bg-emerald-600 text-white py-2 mt-4 rounded-full font-medium hover:bg-emerald-700 transition" data-pid="' + product.id + '">Add to Cart</button>' +
+            '</div>' +
+          '</div>';
       });
-      
-      container.innerHTML = html;
-      
-      // Attach event listeners to the new buttons
+
+      if (products.length > 4) {
+        productsHtml +=
+          '<div class="col-span-2 xl:col-span-3 text-center mt-4 see-more-container">' +
+            '<button class="see-more-btn bg-neutral-200 text-neutral-700 px-6 py-3 rounded-full font-medium hover:bg-neutral-300 transition" data-category="' + category + '">See More</button>' +
+          '</div>';
+      }
+
+      container.innerHTML = productsHtml;
+
+      // Attach event listeners to the new add-to-cart buttons
       container.querySelectorAll('.add-to-cart-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const pid = this.getAttribute('data-pid');
@@ -438,6 +447,19 @@
           }, 1000);
         });
       });
+
+      // Attach event listener for the see-more button
+      const seeMoreButton = container.querySelector('.see-more-btn');
+      if (seeMoreButton) {
+        seeMoreButton.addEventListener('click', function() {
+          const category = this.getAttribute('data-category');
+          container.querySelectorAll('.product-item.hidden[data-category="' + category + '"]').forEach(item => {
+            item.classList.remove('hidden');
+          });
+          // Hide the button's container
+          this.parentElement.style.display = 'none';
+        });
+      }
     }
 
     function renderAllProducts() {

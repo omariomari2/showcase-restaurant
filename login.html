@@ -45,23 +45,35 @@
       <div class="mx-auto w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 shadow-lg">
         <i class="fas fa-utensils text-3xl text-accent"></i>
       </div>
-      <h1 class="text-3xl font-serif font-bold text-white mb-2">FoodTruck Admin</h1>
-      <p class="text-white/80">Sign in to access the admin panel</p>
+      <h1 id="login-title" class="text-3xl font-serif font-bold text-white mb-2">FoodTruck Admin</h1>
+      <p id="login-subtitle" class="text-white/80">Sign in to access the admin panel</p>
     </div>
 
     <!-- Login Form -->
     <div class="glass-effect rounded-2xl p-8 shadow-2xl">
-      <form id="login-form" class="space-y-6">
+      <!-- Tabs -->
+      <div class="flex border-b border-white/20 mb-6">
+        <button id="user-tab" class="flex-1 py-3 text-white/70 font-medium transition-all duration-300 relative">
+          User
+          <span id="user-underline" class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 transition-transform duration-300"></span>
+        </button>
+        <button id="admin-tab" class="flex-1 py-3 text-white/70 font-medium transition-all duration-300 relative">
+          Admin
+          <span id="admin-underline" class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 transition-transform duration-300"></span>
+        </button>
+      </div>
+
+      <!-- User Login Form -->
+      <form id="user-login-form" class="space-y-6 hidden">
         <!-- Username Field -->
         <div>
-          <label for="username" class="block text-sm font-medium text-white mb-2">
+          <label for="user-username" class="block text-sm font-medium text-white mb-2">
             <i class="fas fa-user mr-2"></i>Username
           </label>
           <input 
             type="text" 
-            id="username" 
+            id="user-username" 
             name="username"
-            required
             class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
             placeholder="Enter your username"
           >
@@ -69,17 +81,81 @@
 
         <!-- Password Field -->
         <div>
-          <label for="password" class="block text-sm font-medium text-white mb-2">
+          <label for="user-password" class="block text-sm font-medium text-white mb-2">
             <i class="fas fa-lock mr-2"></i>Password
+          </label>
+          <input 
+            type="password" 
+            id="user-password" 
+            name="password"
+            class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+            placeholder="Enter your password"
+          >
+        </div>
+
+        <!-- Remember Me -->
+        <div class="flex items-center">
+          <input 
+            type="checkbox" 
+            id="remember-me" 
+            class="w-4 h-4 text-accent bg-white/20 border-white/30 rounded focus:ring-accent focus:ring-2"
+          >
+          <label for="remember-me" class="ml-2 text-sm text-white/80">
+            Remember me for 7 days
+          </label>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="hidden mt-4 bg-red-500/20 border border-red-500/50 text-red-100 px-4 py-3 rounded-xl text-sm">
+          <i class="fas fa-exclamation-triangle mr-2"></i>
+          <span id="error-text"></span>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="hidden mt-4 bg-green-500/20 border border-green-500/50 text-green-100 px-4 py-3 rounded-xl text-sm">
+          <i class="fas fa-check-circle mr-2"></i>
+          <span id="success-text"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          class="w-full bg-white text-gray-800 py-3 px-6 rounded-xl font-semibold hover:bg-gray-100 transition-all transform hover:scale-[1.02]"
+        >
+          Sign In as User
+        </button>
+      </form>
+
+      <!-- Admin Login Form -->
+      <form id="admin-login-form" class="space-y-6">
+        <!-- Username Field -->
+        <div>
+          <label for="admin-username" class="block text-sm font-medium text-white mb-2">
+            <i class="fas fa-user-shield mr-2"></i>Admin Username
+          </label>
+          <input 
+            type="text" 
+            id="admin-username" 
+            name="username"
+            required
+            class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+            placeholder="Enter admin username"
+          >
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="admin-password" class="block text-sm font-medium text-white mb-2">
+            <i class="fas fa-lock mr-2"></i>Admin Password
           </label>
           <div class="relative">
             <input 
               type="password" 
-              id="password" 
+              id="admin-password" 
               name="password"
               required
               class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all pr-12"
-              placeholder="Enter your password"
+              placeholder="Enter admin password"
             >
             <button 
               type="button" 
@@ -104,15 +180,15 @@
         </div>
 
         <!-- Error Message -->
-        <div id="error-message" class="hidden bg-red-500/20 border border-red-500/50 text-red-100 px-4 py-3 rounded-xl text-sm">
+        <div id="error-message" class="hidden mt-4 bg-red-500/20 border border-red-500/50 text-red-100 px-4 py-3 rounded-xl text-sm">
           <i class="fas fa-exclamation-triangle mr-2"></i>
-          <span id="error-text">Invalid credentials. Please try again.</span>
+          <span id="error-text"></span>
         </div>
 
         <!-- Success Message -->
-        <div id="success-message" class="hidden bg-green-500/20 border border-green-500/50 text-green-100 px-4 py-3 rounded-xl text-sm">
+        <div id="success-message" class="hidden mt-4 bg-green-500/20 border border-green-500/50 text-green-100 px-4 py-3 rounded-xl text-sm">
           <i class="fas fa-check-circle mr-2"></i>
-          <span>Login successful! Redirecting...</span>
+          <span id="success-text"></span>
         </div>
 
         <!-- Submit Button -->
@@ -121,19 +197,10 @@
           id="login-btn"
           class="w-full bg-white text-gray-800 py-3 px-6 rounded-xl font-semibold hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <span id="login-text">Sign In</span>
+          <span id="login-text">Sign In as Admin</span>
           <i id="login-spinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
         </button>
       </form>
-
-      <!-- Demo Credentials -->
-      <div class="mt-6 p-4 bg-white/10 rounded-xl">
-        <h3 class="text-white font-medium mb-2 text-sm">Demo Credentials:</h3>
-        <div class="text-white/80 text-sm space-y-1">
-          <div><strong>Username:</strong> admin</div>
-          <div><strong>Password:</strong> admin123</div>
-        </div>
-      </div>
 
       <!-- Back to Home -->
       <div class="mt-6 text-center">
@@ -150,11 +217,24 @@
       username: 'admin',
       password: 'admin123'
     };
+    const USER_CREDENTIALS = {
+      username: 'user',
+      password: 'password123'
+    };
 
     // DOM elements
-    const loginForm = document.getElementById('login-form');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
+    const userTab = document.getElementById('user-tab');
+    const adminTab = document.getElementById('admin-tab');
+    const userUnderline = document.getElementById('user-underline');
+    const adminUnderline = document.getElementById('admin-underline');
+    const userLoginForm = document.getElementById('user-login-form');
+    const adminLoginForm = document.getElementById('admin-login-form');
+    
+    const loginTitle = document.getElementById('login-title');
+    const loginSubtitle = document.getElementById('login-subtitle');
+
+    const usernameInput = document.getElementById('admin-username');
+    const passwordInput = document.getElementById('admin-password');
     const rememberMeInput = document.getElementById('remember-me');
     const togglePasswordBtn = document.getElementById('toggle-password');
     const passwordIcon = document.getElementById('password-icon');
@@ -163,13 +243,59 @@
     const loginBtn = document.getElementById('login-btn');
     const loginText = document.getElementById('login-text');
     const loginSpinner = document.getElementById('login-spinner');
+    
+    let activeTab = 'admin'; // 'user' or 'admin'
 
-    // Check if user is already logged in
+    // Check for existing admin session
     window.addEventListener('DOMContentLoaded', () => {
-      if (isAuthenticated()) {
+      if (isAuthenticated('adminAuth')) {
         window.location.href = 'admin.html';
       }
+      // Set initial tab state
+      updateTabState();
     });
+
+    // Tab switching logic
+    userTab.addEventListener('click', () => switchTab('user'));
+    adminTab.addEventListener('click', () => switchTab('admin'));
+
+    function switchTab(tab) {
+      activeTab = tab;
+      updateTabState();
+      hideMessages();
+    }
+
+    function updateTabState() {
+      if (activeTab === 'user') {
+        userTab.classList.add('text-white');
+        userTab.classList.remove('text-white/70');
+        userUnderline.classList.add('scale-x-100');
+        
+        adminTab.classList.remove('text-white');
+        adminTab.classList.add('text-white/70');
+        adminUnderline.classList.remove('scale-x-100');
+
+        userLoginForm.classList.remove('hidden');
+        adminLoginForm.classList.add('hidden');
+        
+        loginTitle.textContent = 'Welcome Back!';
+        loginSubtitle.textContent = 'Sign in to your account';
+      } else {
+        adminTab.classList.add('text-white');
+        adminTab.classList.remove('text-white/70');
+        adminUnderline.classList.add('scale-x-100');
+
+        userTab.classList.remove('text-white');
+        userTab.classList.add('text-white/70');
+        userUnderline.classList.remove('scale-x-100');
+
+        adminLoginForm.classList.remove('hidden');
+        userLoginForm.classList.add('hidden');
+
+        loginTitle.textContent = 'FoodTruck Admin';
+        loginSubtitle.textContent = 'Sign in to access the admin panel';
+      }
+    }
 
     // Toggle password visibility
     togglePasswordBtn.addEventListener('click', () => {
@@ -180,12 +306,25 @@
     });
 
     // Form submission
-    loginForm.addEventListener('submit', async (e) => {
+    adminLoginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      const username = usernameInput.value.trim();
-      const password = passwordInput.value;
-      const rememberMe = rememberMeInput.checked;
+      handleLogin('admin');
+    });
+
+    userLoginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      handleLogin('user');
+    });
+
+    async function handleLogin(type) {
+      const isUser = type === 'user';
+      const form = isUser ? userLoginForm : adminLoginForm;
+      const username = form.querySelector('input[name="username"]').value.trim();
+      const password = form.querySelector('input[name="password"]').value;
+      const rememberMe = !isUser && rememberMeInput.checked;
+      const credentials = isUser ? USER_CREDENTIALS : ADMIN_CREDENTIALS;
+      const successUrl = isUser ? 'index.html' : 'admin.html';
+      const authKey = isUser ? 'userAuth' : 'adminAuth';
 
       // Clear previous messages
       hideMessages();
@@ -197,42 +336,44 @@
       }
 
       // Show loading state
-      setLoadingState(true);
+      if (!isUser) setLoadingState(true);
 
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Check credentials
-      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+      if (username === credentials.username && password === credentials.password) {
         // Success
-        showSuccess();
+        showSuccess('Login successful! Redirecting...');
         
         // Set authentication
-        const expiryTime = rememberMe ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000; // 7 days or 1 day
-        const expiryDate = new Date(Date.now() + expiryTime);
-        
-        localStorage.setItem('adminAuth', JSON.stringify({
-          authenticated: true,
-          username: username,
-          loginTime: new Date().toISOString(),
-          expiryTime: expiryDate.toISOString(),
-          rememberMe: rememberMe
-        }));
+        if (!isUser) {
+            const expiryTime = rememberMe ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
+            const expiryDate = new Date(Date.now() + expiryTime);
+            
+            localStorage.setItem(authKey, JSON.stringify({
+              authenticated: true,
+              username: username,
+              loginTime: new Date().toISOString(),
+              expiryTime: expiryDate.toISOString(),
+              rememberMe: rememberMe
+            }));
+        }
 
         // Redirect after a short delay
         setTimeout(() => {
-          window.location.href = 'admin.html';
+          window.location.href = successUrl;
         }, 1500);
       } else {
         // Failure
-        setLoadingState(false);
+        if (!isUser) setLoadingState(false);
         showError('Invalid username or password.');
         
         // Clear password field
-        passwordInput.value = '';
-        passwordInput.focus();
+        form.querySelector('input[name="password"]').value = '';
+        form.querySelector('input[name="password"]').focus();
       }
-    });
+    }
 
     // Utility functions
     function setLoadingState(loading) {
@@ -247,13 +388,14 @@
     }
 
     function showError(message) {
-      document.getElementById('error-text').textContent = message;
       errorMessage.classList.remove('hidden');
+      document.getElementById('error-text').textContent = message;
       successMessage.classList.add('hidden');
     }
 
-    function showSuccess() {
+    function showSuccess(message) {
       successMessage.classList.remove('hidden');
+      document.getElementById('success-text').textContent = message;
       errorMessage.classList.add('hidden');
     }
 
@@ -262,28 +404,22 @@
       successMessage.classList.add('hidden');
     }
 
-    function isAuthenticated() {
+    function isAuthenticated(key) {
       try {
-        const auth = JSON.parse(localStorage.getItem('adminAuth') || '{}');
-        if (!auth.authenticated) return false;
-        
-        const expiryTime = new Date(auth.expiryTime);
-        if (new Date() > expiryTime) {
-          localStorage.removeItem('adminAuth');
-          return false;
+        const auth = JSON.parse(localStorage.getItem(key) || '{}');
+        if (auth.authenticated) {
+          const expiryTime = new Date(auth.expiryTime);
+          if (new Date() <= expiryTime) {
+            return true;
+          } else {
+            localStorage.removeItem(key);
+          }
         }
-        
-        return true;
       } catch {
         return false;
       }
+      return false;
     }
-
-    // Auto-fill demo credentials on page load for convenience
-    setTimeout(() => {
-      usernameInput.value = ADMIN_CREDENTIALS.username;
-      passwordInput.value = ADMIN_CREDENTIALS.password;
-    }, 500);
   </script>
 </body>
 </html> 

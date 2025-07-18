@@ -239,39 +239,20 @@ class Navbar {
     mobileMenuDiv.appendChild(closeBtn);
     mobileMenuDiv.appendChild(mobileMenuContent);
 
-    // Admin icon - check authentication
-    if (this.options.showSearch) {
-      const adminBtn = document.createElement("a");
-      adminBtn.className = "relative group";
-      adminBtn.id = "admin-btn";
-      adminBtn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-        </svg>`;
-      
-      // Check if user is authenticated
-      adminBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        try {
-          const auth = JSON.parse(localStorage.getItem('adminAuth') || '{}');
-          if (auth.authenticated) {
-            const expiryTime = new Date(auth.expiryTime);
-            if (new Date() <= expiryTime) {
-              window.location.href = 'admin.html';
-            } else {
-              localStorage.removeItem('adminAuth');
-              window.location.href = 'login.html';
-            }
-          } else {
-            window.location.href = 'login.html';
-          }
-        } catch {
-          window.location.href = 'login.html';
-        }
-      });
-      
-      iconsDiv.appendChild(adminBtn);
+    // Combined Sign In button
+    if (this.options.showUser) {
+      const signInBtn = document.createElement("a");
+      signInBtn.href = "login.html";
+      signInBtn.className = "hidden md:flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full border border-neutral-300 hover:bg-neutral-100 transition-colors";
+      signInBtn.id = "signin-btn";
+      signInBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>Sign In</span>
+      `;
+      iconsDiv.appendChild(signInBtn);
     }
 
     if (this.options.showCart) {
@@ -289,19 +270,6 @@ class Navbar {
         </div>
         ${this.options.cartCount > 0 ? `<span class="absolute -top-2 -right-2 bg-emerald-500 text-white text-xs font-semibold w-4 h-4 rounded-full flex items-center justify-center">${this.options.cartCount}</span>` : ''}`;
       iconsDiv.appendChild(cartBtn);
-    }
-
-    if (this.options.showUser) {
-      const userBtn = document.createElement("a");
-      userBtn.className = "relative group";
-      userBtn.id = "user-btn";
-      userBtn.href = "signin.html";
-      userBtn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
-          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>`;
-      iconsDiv.appendChild(userBtn);
     }
 
     // Add hamburger button to icons section
