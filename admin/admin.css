@@ -1,0 +1,8 @@
+/* Admin-specific overrides only */
+
+main.admin-dashboard {
+  /* Example: add a subtle border for admin main */
+  border: 1.5px solid #e5e7eb;
+}
+
+/* You can add more admin-specific styles here as needed */ 

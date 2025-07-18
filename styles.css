@@ -1,471 +1,198 @@
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap');
-
-/* Reset and base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Truck Loader Component Styles */
+.truck-loader {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-:root {
-    --primary-color: #1a1a1a;
-    --secondary-color: #e6b31e;
-    --text-light: #ffffff;
-    --transition: all 0.3s ease;
+.truck-wrapper {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  overflow-x: hidden;
 }
 
-body {
-    min-height: 100vh;
-    background-color: white;
-    font-family: 'Arial', sans-serif;
-    padding-top: 80px; /* Space for fixed navbar */
+.truck-body {
+  width: 130px;
+  height: fit-content;
+  margin-bottom: 6px;
+  animation: truck-motion 1s linear infinite;
 }
 
-/* Navbar Styles */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    padding: 1.5rem 5%;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+@keyframes truck-motion {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
+.truck-tires {
+  width: 130px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px 0px 15px;
+  position: absolute;
+  bottom: 0;
 }
 
-.logo {
-    color: #000;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-    font-family: 'Playfair Display', serif;
+.truck-tires svg {
+  width: 24px;
 }
 
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+.truck-road {
+  width: 100%;
+  height: 1.5px;
+  background-color: #282828;
+  position: relative;
+  bottom: 0;
+  align-self: flex-end;
+  border-radius: 3px;
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-    margin: 0;
-    padding: 0;
+.truck-road::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background-color: #282828;
+  right: -50%;
+  border-radius: 3px;
+  animation: road-animation 1.4s linear infinite;
+  border-left: 10px solid white;
 }
 
-.nav-links a {
-    color: #333;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    position: relative;
-    padding: 0.5rem 0;
+.truck-road::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #282828;
+  right: -65%;
+  border-radius: 3px;
+  animation: road-animation 1.4s linear infinite;
+  border-left: 4px solid white;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-    color: #000;
+.truck-lamp-post {
+  position: absolute;
+  bottom: 0;
+  right: -90%;
+  height: 90px;
+  animation: road-animation 1.4s linear infinite;
 }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #007bff;
-    transition: width 0.3s ease;
+@keyframes road-animation {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-350px);
+  }
 }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
+/* Size variants for truck component */
+.truck-loader.small .truck-wrapper {
+  width: 120px;
+  height: 60px;
 }
 
-.nav-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-left: 1rem;
+.truck-loader.small .truck-body {
+  width: 78px;
 }
 
-.btn {
-    padding: 0.5rem 1.5rem;
-    border-radius: 4px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    font-size: 0.9rem;
+.truck-loader.small .truck-tires {
+  width: 78px;
 }
 
-.btn-login {
-    background: transparent;
-    color: #333;
-    border: 1px solid #ddd;
+.truck-loader.small .truck-tires svg {
+  width: 14px;
 }
 
-.btn-login:hover {
-    background: #f8f9fa;
+.truck-loader.large .truck-wrapper {
+  width: 300px;
+  height: 150px;
 }
 
-.btn-signup {
-    background: #000;
-    color: white;
+.truck-loader.large .truck-body {
+  width: 195px;
 }
 
-.btn-signup:hover {
-    background: #333;
+.truck-loader.large .truck-tires {
+  width: 195px;
 }
 
-.hamburger {
-    display: none;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0.5rem;
+.truck-loader.large .truck-tires svg {
+  width: 36px;
 }
 
-.bar {
-    display: block;
-    width: 25px;
-    height: 2px;
-    margin: 5px 0;
-    background-color: #000;
-    transition: all 0.3s ease;
+/* Carousel Styles */
+.carousel-slide {
+  z-index: 1;
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-    .nav-links {
-        gap: 1.5rem;
-    }
-    
-    .nav-buttons {
-        margin-left: 0.5rem;
-    }
+#carousel-prev,
+#carousel-next {
+  z-index: 10;
 }
 
-@media (max-width: 768px) {
-    .nav-right {
-        position: fixed;
-        left: -100%;
-        top: 80px;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background-color: white;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem 0;
-        transition: 0.3s ease-in-out;
-        overflow-y: auto;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-right.active {
-        left: 0;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        padding: 0 1rem;
-    }
-
-    .nav-links li {
-        width: 100%;
-        text-align: center;
-        padding: 0.8rem 0;
-    }
-
-    .nav-links a {
-        display: block;
-        padding: 0.8rem 0;
-        font-size: 1.1rem;
-        color: #333;
-    }
-
-    .nav-links a::after {
-        display: none;
-    }
-
-    .nav-buttons {
-        flex-direction: column;
-        width: 80%;
-        margin: 1.5rem 0 0;
-        gap: 1rem;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 0.8rem;
-        font-size: 1rem;
-    }
-
-    .hamburger {
-        display: block;
-        z-index: 1001;
-    }
-
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-    }
+.carousel-indicator {
+  z-index: 10;
 }
 
-/* New Stamp Component Styles */
-.stamp {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+/* Custom animations for page elements */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
 }
 
-.stamp-outer {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border: 2px solid #d4af37;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+@keyframes fadeInUp {
+  0% { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
-.stamp-inner {
-    width: 100%;
-    height: 100%;
-    border: 2px dashed #d4af37;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+@keyframes scaleIn {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.9); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
 }
 
-.stamp-content {
-    text-align: center;
-    color: #333;
-    font-family: 'Playfair Display', serif;
+/* Utility classes for animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-.stamp-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    margin-bottom: 5px;
-    text-transform: uppercase;
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
-.stamp-subtitle {
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    color: #d4af37;
-}
-
-.stamp-year {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #d4af37;
-    margin-top: 10px;
-}
-
-.stamp-decoration {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-}
-
-.stamp-decoration svg {
-    width: 100%;
-    height: 100%;
-}
-
-.stamp-decoration text {
-    fill: #d4af37;
-    font-family: 'Arial', sans-serif;
-    font-size: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-/* Section Header */
-.section-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 4rem 0 2rem;
-    width: 100%;
-}
-
-.section-line {
-    height: 1px;
-    background-color: #d4af37;
-    flex: 1;
-    max-width: 100px;
-    position: relative;
-}
-
-.section-line::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background-color: #d4af37;
-    transform: scaleX(0.2);
-    transform-origin: center;
-}
-
-.section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: #333;
-    margin: 0 2rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 500;
-    text-align: center;
-}
-
-/* Hero Section */
-.hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 80px 20px 40px;
-    background-color: #fff;
-}
-
-.stamp-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3rem 1rem;
-    min-height: 70vh;
-}
-
-.stamp {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border: 2px solid black;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.outer-circle {
-    position: relative;
-    width: 90%;
-    height: 90%;
-    border: 1px solid black;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.inner-circle {
-    width: 70%;
-    height: 70%;
-    background: white;
-    border-radius: 50%;
-    border: 2px dashed #ccc;
-}
-
-.inscription {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    color: black;
-    font-size: 14px;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    transform: rotate(-5deg);
-    padding: 0 40px;
-}
-
-.inscription::before {
-    content: "•";
-    margin-right: 10px;
-}
-
-.inscription::after {
-    content: "•";
-    margin-left: 10px;
-}
-
-/* Circular Text Component */
-.circular-text-container {
-    margin: 2rem auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: 300px;
-}
-
-.circular-text-container svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-}
-
-.circular-text-container text {
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    fill: #000;
-    font-family: Arial, sans-serif;
-}
-
-/* Animation for the circular text */
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Uncomment to add rotation animation */
-/* .circular-text-container svg {
-    animation: rotate 20s linear infinite;
-} */
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+} 

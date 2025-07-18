@@ -1,144 +1,917 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crave Restaurant</title>
-  <link rel="stylesheet" href="src/index.css">
-  <link rel="stylesheet" href="src/cart.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN+Guides&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div id="navbar-container" class="fade-in fade-in-delay-1"></div>
+<html lang="en" class="scroll-smooth"><head><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simplify • Aurova</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+    theme: {
+    extend: {
+    fontFamily: {
+    sans: ['Inter','ui-sans-serif','system-ui'],
+    serif: ['Fraunces','ui-serif','Georgia']
+    },
+    animation: {
+    'float': 'float 6s ease-in-out infinite',
+    'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+    'scale-in': 'scaleIn 0.6s ease-out forwards'
+    },
+    keyframes: {
+    float: {
+    '0%, 100%': { transform: 'translateY(0px)' },
+    '50%': { transform: 'translateY(-10px)' }
+    },
+    fadeInUp: {
+    '0%': { opacity: '0', transform: 'translateY(30px)' },
+    '100%': { opacity: '1', transform: 'translateY(0)' }
+    },
+    scaleIn: {
+    '0%': { opacity: '0', transform: 'scale(0.9)' },
+    '100%': { opacity: '1', transform: 'scale(1)' }
+    }
+    }
+    }
+    }
+    }
+    </script></head>
+    <body class="bg-neutral-50 text-neutral-900 antialiased overflow-x-hidden">
+    
+    <!-- CURSOR FOLLOWER -->
+    <div id="cursor" class="fixed w-6 h-6 bg-black/20 rounded-full pointer-events-none z-50 mix-blend-difference transition-all duration-300 ease-out" style="transform: translate(-50%, -50%); left: 1446px; top: 204px;"></div>
+    
+    <!-- NAVBAR COMPONENT -->
+    <foodtruck-navbar active="home" cart="0"></foodtruck-navbar>
+    
+    <!-- HERO -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20" data-reveal="" style="opacity: 1; transform: translateY(0px);">
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 via-neutral-50 to-rose-50"></div>
+      <div class="relative max-w-8xl mx-auto px-8 text-center">
+        <div class="mb-8">
+          <div class="inline-block px-6 py-4" id="hero-truck-container"></div>
+        </div>
+        <h1 class="text-[12vw] lg:text-[10rem] xl:text-[12rem] leading-[0.8] font-serif font-medium tracking-tighter mb-8">
+          <span class="block">FoodTruck</span>
+        </h1>
+        <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-lg font-light leading-relaxed mb-12">
+          <p class="opacity-80">Authentic local meals, made for the street.</p>
+          <p class="opacity-80">Simple flavors that fuel your day—nothing more, nothing less than pure taste.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <button class="group px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-neutral-800 transition-all duration-300 hover:scale-105">
+            <span class="flex items-center gap-2">
+              Order Now
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </span>
+          </button>
+          <a href="contact.html" class="px-8 py-4 border border-neutral-300 rounded-full font-medium hover:bg-white hover:shadow-lg transition-all duration-300 inline-block">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- HERO CAROUSEL -->
+    <section class="max-w-8xl mx-auto px-8 -mt-32" data-reveal="" style="opacity: 1; transform: translateY(0px);">
+      <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+        <div class="aspect-[16/9] lg:aspect-[21/9] relative">
+          <!-- Carousel Slides -->
+          <div id="carousel-container" class="relative w-full h-full">
+            <!-- Slide 1 -->
+            <div class="carousel-slide absolute inset-0 transition-all duration-700 ease-in-out" data-slide="0">
+              <img src="images/jollofrice.png" alt="Gourmet Burger" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+              <div class="absolute bottom-8 left-8 right-8 text-white">
+                <div class="flex items-end justify-between">
+                  <div class="">
+                    <h3 class="text-2xl font-serif font-medium mb-2">Gourmet Burgers</h3>
+                    <p class="text-sm opacity-90">Handcrafted with premium beef</p>
+                  </div>
+                  <div class="hidden md:block text-right">
+                    <p class="text-sm opacity-90">Starting from</p>
+                    <p class="text-lg font-medium">$12.99</p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <section class="landing-section">
-    <div class="restaurant-motto">Where we all eat and enjoy</div>
-    <h1 class="landing-title">RESTAURANT
-      <img src="src/images/jollof.png" alt="Jollof Rice" class="jollof-image-topright" />
-    </h1>
-    <div class="info-row">
-      <div class="location-component">
-        <span class="location-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10.5c0 7.5-9 12-9 12s-9-4.5-9-12a9 9 0 1 1 18 0z"/><circle cx="12" cy="10.5" r="3.5"/></svg>
-        </span>
-        <span class="location-text">147 St Darkuman, Accra, Ghana</span>
+            <!-- Slide 2 -->
+            <div class="carousel-slide absolute inset-0 transition-all duration-700 ease-in-out opacity-0" data-slide="1">
+              <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=1600&q=80" alt="Fresh Tacos" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+              <div class="absolute bottom-8 left-8 right-8 text-white">
+                <div class="flex items-end justify-between">
+                  <div class="">
+                    <h3 class="text-2xl font-serif font-medium mb-2">Authentic Tacos</h3>
+                    <p class="text-sm opacity-90">Fresh ingredients, bold flavors</p>
+                  </div>
+                  <div class="hidden md:block text-right">
+                    <p class="text-sm opacity-90">Starting from</p>
+                    <p class="text-lg font-medium">$8.99</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-slide absolute inset-0 transition-all duration-700 ease-in-out opacity-0" data-slide="2">
+              <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1600&q=80" alt="Loaded Fries" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+              <div class="absolute bottom-8 left-8 right-8 text-white">
+                <div class="flex items-end justify-between">
+                  <div class="">
+                    <h3 class="text-2xl font-serif font-medium mb-2">Loaded Fries</h3>
+                    <p class="text-sm opacity-90">Crispy, cheesy, and delicious</p>
+                  </div>
+                  <div class="hidden md:block text-right">
+                    <p class="text-sm opacity-90">Starting from</p>
+                    <p class="text-lg font-medium">$6.99</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <button id="carousel-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 hover:bg-white/30 transition-all duration-300 group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+          </button>
+
+          <button id="carousel-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 hover:bg-white/30 transition-all duration-300 group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </button>
+
+          <!-- Carousel Indicators -->
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
+            <button class="carousel-indicator w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-300" data-slide="0"></button>
+            <button class="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white transition-all duration-300" data-slide="1"></button>
+            <button class="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white transition-all duration-300" data-slide="2"></button>
+          </div>
+        </div>
       </div>
-      <div class="social-buttons">
-        <a href="tel:+1234567890" class="social-btn" title="Call">
-          <span class="social-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3 5.18 2 2 0 0 1 5 3h4.09a2 2 0 0 1 2 1.72c.13 1.13.37 2.23.72 3.28a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c1.05.35 2.15.59 3.28.72A2 2 0 0 1 22 16.92z"/></svg>
-          </span>
-        </a>
-        <a href="mailto:info@example.com" class="social-btn" title="Email">
-          <span class="social-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-          </span>
-        </a>
-        <a href="https://www.snapchat.com/add/yourusername" class="social-btn" title="Snapchat" target="_blank">
-          <span class="social-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15c1.333-1 6.667-1 8 0"/><path d="M9 9c.667.667 4.333.667 5 0"/></svg>
-          </span>
-        </a>
-        <a href="https://www.instagram.com/yourusername" class="social-btn" title="Instagram" target="_blank">
-          <span class="social-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
-          </span>
-        </a>
+    </section>
+    
+    <!-- STATS -->
+    <section class="max-w-8xl mx-auto px-8 py-24" data-reveal="" style="opacity: 1; transform: translateY(0px);">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+        <div class="group">
+          <div class="text-4xl font-serif font-medium mb-2 transition-transform duration-300 group-hover:scale-105">25K+</div>
+          <div class="text-sm opacity-60 uppercase tracking-wider">Meals Served</div>
+        </div>
+        <div class="group">
+          <div class="text-4xl font-serif font-medium mb-2 transition-transform duration-300 group-hover:scale-105">99%</div>
+          <div class="text-sm opacity-60 uppercase tracking-wider">Fresh Ingredients</div>
+        </div>
+        <div class="group">
+          <div class="text-4xl font-serif font-medium mb-2 transition-transform duration-300 group-hover:scale-105">4.9★</div>
+          <div class="text-sm opacity-60 uppercase tracking-wider">Customer Rating</div>
+        </div>
       </div>
-      <div class="rating-component">
-        <span class="rating-count">4.2k+ Rating</span>
-        <span class="rating-divider"></span>
-        <span class="rating-star">&#11088;</span>
-        <span class="rating-value">4.8</span>
+    </section>
+    
+    <!-- FILTER BAR -->
+    <section class="bg-neutral-50/90 backdrop-blur-xl border-y border-neutral-200/50" data-reveal="" style="opacity: 1; transform: translateY(0px);">
+      <div class="max-w-8xl mr-auto ml-auto pt-6 pr-8 pb-6 pl-8">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div class="flex items-center gap-6">
+            <h2 class="text-lg font-serif font-medium">Filter &amp; Discover</h2>
+            <span class="text-sm opacity-60">24 menu items</span>
+          </div>
+          <div class="flex items-center gap-3 flex-wrap">
+            <div class="relative">
+              <button data-dropdown-toggle="cat-dd" class="group flex items-center gap-2 px-5 py-3 bg-white border border-neutral-200 rounded-full text-sm font-medium hover:border-neutral-300 hover:shadow-md transition-all duration-300">
+                <span>Category</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-300 group-hover:rotate-180"><path d="m6 9 6 6 6-6"></path></svg>
+              </button>
+              <div id="cat-dd" class="hidden absolute z-[9999] mt-2 w-48 bg-white rounded-2xl shadow-xl border border-neutral-200 p-2">
+                <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">Breakfast</a>
+                <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">Lunch</a>
+                <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">Supper</a>
+              </div>
+            </div>
+            <div class="relative">
+              <button data-dropdown-toggle="col-dd" class="group flex items-center gap-2 px-5 py-3 bg-orange-50 border border-orange-200 rounded-full text-sm font-medium hover:bg-orange-100 transition-all duration-300">
+                <span class="flex items-center gap-2">
+                  <span class="w-3 h-3 bg-orange-500 rounded-full"></span>
+                  Spicy
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-300 group-hover:rotate-180"><path d="m6 9 6 6 6-6"></path></svg>
+              </button>
+              <div id="col-dd" class="hidden absolute z-[9999] mt-2 w-44 bg-white rounded-2xl shadow-xl border border-neutral-200 p-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">
+                  <span class="w-3 h-3 bg-orange-500 rounded-full"></span>
+                  Spicy Level
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">
+                  <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                  Vegetarian
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">
+                  <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
+                  Gluten Free
+                </a>
+              </div>
+            </div>
+            <div class="relative">
+              <input type="text" placeholder="Search menu items..." class="w-64 border border-neutral-200 rounded-full py-3 pl-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-300 transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" class="lucide lucide-search w-4 h-4 absolute right-4 top-3.5 text-neutral-400"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="scroll-indicator" id="scroll-indicator">
-      <!-- Downward arrow SVG -->
-      <svg width="100" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20 20L50 50L80 20" stroke="#222" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <!-- <div class="burger-image-container" id="burger-image-container">
-      <img src="src/images/burger.png" alt="Burger" class="burger-image" />
-    </div> -->
-    <div class="custom-circular-text-wrapper fade-in fade-in-delay-3">
-      <div class="custom-circular-text-container">
-        <svg viewBox="0 0 200 200">
-          <path id="customTextPath" d="M20,100a80,80 0 1,1 160,0a80,80 0 1,1 -160,0" fill="none" stroke="none" />
-          <text>
-            <textPath href="#customTextPath" startOffset="50%" text-anchor="middle" font-size="12">
-              BEST FOOD FOR THE BEST PEOPLE AT THE BEST PRICES •
-            </textPath>
-          </text>
-        </svg>
+    </section>
+    
+    <!-- PRODUCTS -->
+    <section class="max-w-8xl mx-auto px-8 py-16" data-reveal="" style="opacity: 1; transform: translateY(0px);">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-16">
+        <!-- Collection Info -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-40">
+            <div class="mb-6">
+              <span class="text-xs tracking-[0.2em] uppercase text-neutral-400 font-medium">/02 Menu</span>
+              <h2 class="text-4xl font-serif font-medium leading-tight mt-2 mb-4">Daily Specials</h2>
+              <p class="text-neutral-600 leading-relaxed">Fresh ingredients meet bold flavors in our signature menu. Each dish is carefully prepared to deliver authentic taste and quality that keeps you coming back.</p>
+            </div>
+            <div class="space-y-4 mb-8">
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-neutral-500">Available items</span>
+                <span class="font-medium">24</span>
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-neutral-500">Price range</span>
+                <span class="font-medium">$8.99 - $24.99</span>
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-neutral-500">Portion sizes</span>
+                <span class="font-medium">Regular - Large</span>
+              </div>
+            </div>
+            <button class="group w-full flex items-center justify-center gap-2 px-6 py-4 bg-black text-white rounded-full text-sm font-medium hover:bg-neutral-800 transition-all duration-300 hover:scale-105">
+              <span class="">View Full Menu</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" class="lucide lucide-arrow-up-right w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+            </button>
+          </div>
+        </div>
+    
+        <!-- Product Grid -->
+        <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          <!-- Product 1 -->
+          <div class="group">
+            <div class="relative overflow-hidden bg-neutral-100 rounded-3xl mb-4">
+              <div class="aspect-[3/4]">
+                <img src="https://plus.unsplash.com/premium_photo-1675252369719-dd52bc69c3df?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Classic Burger" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" style="">
+              </div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+              <button class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 bg-white/90 border-white/20 border rounded-full pt-3 pr-3 pb-3 pl-3 backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" class="lucide lucide-heart w-4 h-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </button>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-y-0 translate-y-2">
+                <button class="add-to-cart-btn w-full bg-white/95 backdrop-blur-sm text-black py-3 px-4 rounded-full font-medium hover:bg-white transition-colors" data-product-id="1">
+                  Add to Order
+                </button>
+              </div>
+            </div>
+            <div class="px-2">
+              <h3 class="font-medium mb-2">Classic Burger</h3>
+              <div class="flex items-center gap-1 mb-3">
+                <div class="flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 text-neutral-300"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                </div>
+                <span class="text-xs text-neutral-500 ml-1">(127)</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-neutral-500">Regular - Large</span>
+                <span class="text-lg font-serif font-medium">$12.99</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Product 2 -->
+          <div class="group">
+            <div class="relative rounded-3xl overflow-hidden bg-neutral-100 mb-4">
+              <div class="aspect-[3/4]">
+                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80" alt="Street Tacos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" style="">
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <button class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border border-white/20 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" class="lucide lucide-heart w-4 h-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </button>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                <button class="add-to-cart-btn w-full bg-white/95 backdrop-blur-sm text-black py-3 px-4 rounded-full font-medium hover:bg-white transition-colors" data-product-id="2">
+                  Add to Order
+                </button>
+              </div>
+            </div>
+            <div class="px-2">
+              <h3 class="font-medium mb-2">Street Tacos</h3>
+              <div class="flex items-center gap-1 mb-3">
+                <div class="flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 text-neutral-300"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                </div>
+                <span class="text-xs text-neutral-500 ml-1">(203)</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-neutral-500">Regular - Large</span>
+                <span class="text-lg font-serif font-medium">$8.99</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Product 3 -->
+          <div class="group">
+            <div class="relative rounded-3xl overflow-hidden bg-neutral-100 mb-4">
+              <div class="aspect-[3/4]">
+                <img src="images/jollofrice.png" alt="Jollof Rice & Chicken" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+              <button class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 bg-white/90 border-white/20 border rounded-full pt-3 pr-3 pb-3 pl-3 backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" class="lucide lucide-heart w-4 h-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </button>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                <button class="add-to-cart-btn w-full bg-white/95 backdrop-blur-sm text-black py-3 px-4 rounded-full font-medium hover:bg-white transition-colors" data-product-id="3">
+                  Add to Order
+                </button>
+              </div>
+            </div>
+            <div class="px-2">
+              <h3 class="font-medium mb-2">Jollof Rice & Chicken</h3>
+              <div class="flex items-center gap-1 mb-3">
+                <div class="flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 text-neutral-300"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                </div>
+                <span class="text-xs text-neutral-500 ml-1">(89)</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-neutral-500">Regular - Large</span>
+                <span class="text-lg font-serif font-medium">$18.99</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Product 4 -->
+          <div class="group">
+            <div class="relative rounded-3xl overflow-hidden bg-neutral-100 mb-4">
+              <div class="aspect-[3/4]">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80" alt="Loaded Fries" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <button class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border border-white/20 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" class="lucide lucide-heart w-4 h-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </button>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                <button class="add-to-cart-btn w-full bg-white/95 backdrop-blur-sm text-black py-3 px-4 rounded-full font-medium hover:bg-white transition-colors" data-product-id="4">
+                  Add to Order
+                </button>
+              </div>
+            </div>
+            <div class="px-2">
+              <h3 class="font-medium mb-2">Loaded Fries</h3>
+              <div class="flex items-center gap-1 mb-3">
+                <div class="flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                </div>
+                <span class="text-xs text-neutral-500 ml-1">(156)</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-neutral-500">Regular - Large</span>
+                <span class="text-lg font-serif font-medium">$6.99</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Product 5 -->
+          <div class="group">
+            <div class="relative rounded-3xl overflow-hidden bg-neutral-100 mb-4">
+              <div class="aspect-[3/4]">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Gourmet Burger" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <button class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border border-white/20 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" class="lucide lucide-heart w-4 h-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </button>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                <button class="add-to-cart-btn w-full bg-white/95 backdrop-blur-sm text-black py-3 px-4 rounded-full font-medium hover:bg-white transition-colors" data-product-id="5">
+                  Add to Order
+                </button>
+              </div>
+            </div>
+            <div class="px-2">
+              <h3 class="font-medium mb-2">Gourmet Burger</h3>
+              <div class="flex items-center gap-1 mb-3">
+                <div class="flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                </div>
+                <span class="text-xs text-neutral-500 ml-1">(211)</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-neutral-500">Regular - Large</span>
+                <span class="text-lg font-serif font-medium">$15.99</span>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Product 6 -->
+          <div class="group">
+            <div class="relative rounded-3xl overflow-hidden bg-neutral-100 mb-4">
+              <div class="aspect-[3/4]">
+                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80" alt="Chicken Wings" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <button class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border border-white/20 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" class="lucide lucide-heart w-4 h-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+              </button>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                <button class="add-to-cart-btn w-full bg-white/95 backdrop-blur-sm text-black py-3 px-4 rounded-full font-medium hover:bg-white transition-colors" data-product-id="6">
+                  Add to Order
+                </button>
+              </div>
+            </div>
+            <div class="px-2">
+              <h3 class="font-medium mb-2">Chicken Wings</h3>
+              <div class="flex items-center gap-1 mb-3">
+                <div class="flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 fill-black text-black"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" class="lucide lucide-star w-4 h-4 text-neutral-300"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                </div>
+                <span class="text-xs text-neutral-500 ml-1">(94)</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-neutral-500">Regular - Large</span>
+                <span class="text-lg font-serif font-medium">$10.99</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="order-now-circular-btn-bottomright fade-in fade-in-delay-3">
-      <div class="order-now-circular-text">
-        <svg viewBox="0 0 200 200">
-          <path id="orderNowTextPath" d="M100,20 a80,80 0 1,1 -0.1,0" fill="none" />
-          <text font-size="18" font-family="'Montserrat', Arial, sans-serif" fill="#222" letter-spacing="3">
-            <textPath href="#orderNowTextPath" startOffset="0">
-              ORDER NOW - ORDER NOW - ORDER NOW -
-            </textPath>
-          </text>
-        </svg>
+    </section>
+    
+    <!-- CTA SECTION -->
+    <section class="max-w-8xl mx-auto px-8 py-24" data-reveal="" style="opacity: 1; transform: translateY(0px);">
+      <div class="relative overflow-hidden text-white bg-cover rounded-3xl bg-center bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/24d17eda-2389-4b1a-9715-b15c7bfc0cfb_3840w.jpg)]">
+        <div class="absolute inset-0 bg-cover bg-center opacity-10 bg-[url(https://images.unsplash.com/photo-1635776062764-e025521e3df3?w=3840&amp;q=80)]"></div>
+        <div class="relative text-center pt-20 pr-12 pb-20 pl-12">
+          <h2 class="text-5xl font-serif font-medium mb-6">Join the FoodTruck Family</h2>
+          <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Be the first to know about daily specials, new menu items, and exclusive food truck locations.</p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <input type="email" placeholder="Enter your email" class="px-6 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/30 w-80">
+            <button class="px-8 py-4 bg-white text-emerald-800 rounded-full font-medium hover:bg-neutral-100 transition-colors">
+              Subscribe
+            </button>
+          </div>
+          <p class="text-sm opacity-70">No spam, just delicious updates and special offers.</p>
+        </div>
       </div>
-      <button class="order-now-btn-center">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="12" fill="black"/>
-          <path d="M8 12h8m0 0l-4-4m4 4l-4 4" stroke="#fff"/>
-        </svg>
-      </button>
-    </div>
-  </section>
-  <img src="src/images/collage.png" alt="Collage" class="collage-image-farleft"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="src/cart.js"></script>
-  <script>
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-container').innerHTML = data;
-      });
-    // Animate scroll indicator after 3 seconds
-    window.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        document.getElementById('scroll-indicator').classList.add('animated');
-      }, 3000);
-      // Trigger burger slide-in after all fade-ins (2.2s max delay + 1.2s anim = 3.4s)
-      setTimeout(function() {
-        document.getElementById('burger-image-container').classList.add('burger-slide-in-animate');
-      }, 3400);
-      // Add collage-move-in class to collage image
-      var collage = document.querySelector('.collage-image-farleft');
-      if (collage) {
-        collage.classList.add('collage-move-in');
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="bg-neutral-900 text-white rounded-t-3xl" data-reveal="" style="opacity: 1; transform: translateY(0px);">
+      <div class="max-w-8xl mx-auto px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div>
+            <div class="mb-6">
+              <div id="footer-truck-container"></div>
+            </div>
+            <h3 class="text-2xl font-serif font-medium mb-6">FoodTruck</h3>
+            <p class="text-neutral-400 leading-relaxed mb-6">Authentic street food made with fresh ingredients and bold flavors. Quality that satisfies your hunger.</p>
+            <div class="flex items-center gap-4">
+              <button class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="instagram" class="lucide lucide-instagram w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+              </button>
+              <button class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="twitter" class="lucide lucide-twitter w-5 h-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+              </button>
+              <button class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="facebook" class="lucide lucide-facebook w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </button>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-medium mb-4">Menu</h4>
+            <div class="space-y-2 text-neutral-400">
+              <a href="#" class="block hover:text-white transition-colors">Breakfast</a>
+              <a href="#" class="block hover:text-white transition-colors">Lunch</a>
+              <a href="#" class="block hover:text-white transition-colors">Supper</a>
+              <a href="#" class="block hover:text-white transition-colors">Daily Specials</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-medium mb-4">Support</h4>
+            <div class="space-y-2 text-neutral-400">
+              <a href="#" class="block hover:text-white transition-colors">Track Order</a>
+              <a href="#" class="block hover:text-white transition-colors">Allergen Info</a>
+                                  <a href="contact.html" class="block hover:text-white transition-colors">Contact Us</a>
+              <a href="#" class="block hover:text-white transition-colors">FAQ</a>
+            </div>
+          </div>
+          <div class="">
+            <h4 class="font-medium mb-4">Company</h4>
+            <div class="space-y-2 text-neutral-400">
+              <a href="#" class="block hover:text-white transition-colors">About Us</a>
+              <a href="#" class="block hover:text-white transition-colors">Locations</a>
+              <a href="#" class="block hover:text-white transition-colors">Catering</a>
+              <a href="#" class="block hover:text-white transition-colors">Partnerships</a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-neutral-800 pt-8 flex flex-col md:flex-row items-center justify-between">
+          <p class="text-neutral-400 text-sm">© 2024 FoodTruck. All rights reserved.</p>
+          <div class="flex items-center gap-8 text-sm text-neutral-400 mt-4 md:mt-0">
+            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            <a href="#" class="hover:text-white transition-colors">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="navbar.js"></script>
+    <script src="foodtruck-navbar.js"></script>
+    <script src="user.js"></script>
+    <script src="products.js"></script>
+    <script src="cart.js"></script>
+    <script>
+    // Truck Loader Component Function
+    function createTruckLoader(options = {}) {
+      const {
+        size = 'medium',
+        containerId = null,
+        truckColor = '#F83D3D',
+        windowColor = '#7D7C7C',
+        showLampPost = true
+      } = options;
+
+      const sizeClass = size !== 'medium' ? ` truck-loader-${size}` : '';
+      
+      const truckHTML = `
+        <div class="truck-loader${sizeClass}">
+          <div class="truck-wrapper">
+            <div class="truck-body">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 198 93"
+                class="trucksvg"
+              >
+                <!-- Main truck body -->
+                <path
+                  stroke-width="3"
+                  stroke="#282828"
+                  fill="${truckColor}"
+                  d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z"
+                ></path>
+                <!-- Windows -->
+                <path
+                  stroke-width="3"
+                  stroke="#282828"
+                  fill="${windowColor}"
+                  d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"
+                ></path>
+                <!-- Door handle -->
+                <path
+                  stroke-width="2"
+                  stroke="#282828"
+                  fill="#282828"
+                  d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"
+                ></path>
+                <!-- Headlight -->
+                <rect
+                  stroke-width="2"
+                  stroke="#282828"
+                  fill="#FFFCAB"
+                  rx="1"
+                  height="7"
+                  width="5"
+                  y="63"
+                  x="187"
+                ></rect>
+                <!-- Exhaust pipe -->
+                <rect
+                  stroke-width="2"
+                  stroke="#282828"
+                  fill="#282828"
+                  rx="1"
+                  height="11"
+                  width="4"
+                  y="81"
+                  x="193"
+                ></rect>
+                <!-- Main truck body -->
+                <rect
+                  stroke-width="3"
+                  stroke="#282828"
+                  fill="#DFDFDF"
+                  rx="2.5"
+                  height="90"
+                  width="121"
+                  y="1.5"
+                  x="6.5"
+                ></rect>
+                <!-- Bumper -->
+                <rect
+                  stroke-width="2"
+                  stroke="#282828"
+                  fill="#DFDFDF"
+                  rx="2"
+                  height="4"
+                  width="6"
+                  y="84"
+                  x="1"
+                ></rect>
+                <!-- Food truck sign -->
+                <rect
+                  stroke-width="2"
+                  stroke="#282828"
+                  fill="#FFD93D"
+                  rx="2"
+                  height="12"
+                  width="40"
+                  y="15"
+                  x="25"
+                ></rect>
+                <!-- "FOOD" text on sign -->
+                <text x="35" y="23" font-family="Arial, sans-serif" font-size="6" font-weight="bold" text-anchor="middle" fill="#282828">FOOD</text>
+                <!-- Steam effect from food truck -->
+                <circle cx="45" cy="8" r="2" fill="#E8E8E8" opacity="0.7">
+                  <animate attributeName="cy" values="8;4;8" dur="2s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="50" cy="6" r="1.5" fill="#E8E8E8" opacity="0.6">
+                  <animate attributeName="cy" values="6;2;6" dur="2.5s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="55" cy="9" r="1.8" fill="#E8E8E8" opacity="0.8">
+                  <animate attributeName="cy" values="9;5;9" dur="1.8s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.8;0;0.8" dur="1.8s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
+            </div>
+            <div class="truck-tires">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 30 30"
+                class="tiresvg"
+              >
+                <circle
+                  stroke-width="3"
+                  stroke="#282828"
+                  fill="#282828"
+                  r="13.5"
+                  cy="15"
+                  cx="15"
+                ></circle>
+                <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 30 30"
+                class="tiresvg"
+              >
+                <circle
+                  stroke-width="3"
+                  stroke="#282828"
+                  fill="#282828"
+                  r="13.5"
+                  cy="15"
+                  cx="15"
+                ></circle>
+                <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+              </svg>
+            </div>
+            <div class="truck-road"></div>
+            ${showLampPost ? `
+            <svg
+              xml:space="preserve"
+              viewBox="0 0 453.459 453.459"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns="http://www.w3.org/2000/svg"
+              id="Capa_1"
+              version="1.1"
+              fill="#000000"
+              class="truck-lamp-post"
+            >
+              <path
+                d="M252.882,0c-37.781,0-68.686,29.953-70.245,67.358h-6.917v8.954c-26.109,2.163-45.463,10.011-45.463,19.366h9.993
+  c-1.65,5.146-2.507,10.54-2.507,16.017c0,28.956,23.558,52.514,52.514,52.514c28.956,0,52.514-23.558,52.514-52.514
+  c0-5.478-0.856-10.872-2.506-16.017h9.992c0-9.354-19.352-17.204-45.463-19.366v-8.954h-6.149C200.189,38.779,223.924,16,252.882,16
+  c29.952,0,54.32,24.368,54.32,54.32c0,28.774-11.078,37.009-25.105,47.437c-17.444,12.968-37.216,27.667-37.216,78.884v113.914
+  h-0.797c-5.068,0-9.174,4.108-9.174,9.177c0,2.844,1.293,5.383,3.321,7.066c-3.432,27.933-26.851,95.744-8.226,115.459v11.202h45.75
+  v-11.202c18.625-19.715-4.794-87.527-8.227-115.459c2.029-1.683,3.322-4.223,3.322-7.066c0-5.068-4.107-9.177-9.176-9.177h-0.795
+  V196.641c0-43.174,14.942-54.283,30.762-66.043c14.793-10.997,31.559-23.461,31.559-60.277C323.202,31.545,291.656,0,252.882,0z
+  M232.77,111.694c0,23.442-19.071,42.514-42.514,42.514c-23.442,0-42.514-19.072-42.514-42.514c0-5.531,1.078-10.957,3.141-16.017
+  h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
+              ></path>
+            </svg>
+            ` : ''}
+          </div>
+        </div>
+      `;
+
+      // If containerId is provided, insert the HTML into that element
+      if (containerId) {
+        const container = document.getElementById(containerId);
+        if (container) {
+          container.innerHTML = truckHTML;
+        }
       }
-      // Add jollof-move-in class to jollof image
-      var jollof = document.querySelector('.jollof-image-topright');
-      if (jollof) {
-        jollof.classList.add('jollof-move-in');
-      }
-      // Add location-move-in to location component
-      var location = document.querySelector('.location-component');
-      if (location) {
-        location.classList.add('location-move-in');
-      }
-      // Add rating-move-in to rating component
-      var rating = document.querySelector('.rating-component');
-      if (rating) {
-        rating.classList.add('rating-move-in');
-      }
-      // Add order-now-move-in to order-now button
-      var orderNow = document.querySelector('.order-now-circular-btn-bottomright');
-      if (orderNow) {
-        orderNow.classList.add('order-now-move-in');
-      }
+
+      return truckHTML;
+    }
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Cursor follower
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
     });
-  </script>
-</body>
-</html> 
+    
+    // Reveal animations on scroll
+    const revealElements = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    revealElements.forEach(el => observer.observe(el));
+    
+    // Dropdown functionality
+    document.querySelectorAll('[data-dropdown-toggle]').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdownId = button.getAttribute('data-dropdown-toggle');
+        const dropdown = document.getElementById(dropdownId);
+        dropdown.classList.toggle('hidden');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+      document.querySelectorAll('[id$="-dd"]').forEach(dropdown => {
+        dropdown.classList.add('hidden');
+      });
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Initialize truck component in hero section
+    document.addEventListener('DOMContentLoaded', function() {
+      createTruckLoader({ 
+        containerId: 'hero-truck-container',
+        truckColor: '#FF6B35', // Orange food truck color
+        windowColor: '#FFD93D', // Warm yellow for windows
+        showLampPost: true
+      });
+
+      // Initialize truck component in footer
+      createTruckLoader({ 
+        containerId: 'footer-truck-container',
+        truckColor: '#FF6B35', // Orange food truck color
+        windowColor: '#FFD93D', // Warm yellow for windows
+        showLampPost: false,
+        size: 'small'
+      });
+
+      // Initialize carousel functionality
+      initCarousel();
+    });
+
+    // Carousel functionality
+    function initCarousel() {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const indicators = document.querySelectorAll('.carousel-indicator');
+      const prevBtn = document.getElementById('carousel-prev');
+      const nextBtn = document.getElementById('carousel-next');
+      
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+
+      // Function to show slide
+      function showSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => {
+          slide.style.opacity = '0';
+          slide.style.zIndex = '0';
+        });
+        
+        // Reset all indicators
+        indicators.forEach(indicator => {
+          indicator.classList.remove('bg-white/60');
+          indicator.classList.add('bg-white/30');
+        });
+
+        // Show current slide
+        slides[index].style.opacity = '1';
+        slides[index].style.zIndex = '1';
+        
+        // Update indicator
+        indicators[index].classList.remove('bg-white/30');
+        indicators[index].classList.add('bg-white/60');
+        
+        currentSlide = index;
+      }
+
+      // Next slide function
+      function nextSlide() {
+        const next = (currentSlide + 1) % totalSlides;
+        showSlide(next);
+      }
+
+      // Previous slide function
+      function prevSlide() {
+        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(prev);
+      }
+
+      // Event listeners
+      nextBtn.addEventListener('click', nextSlide);
+      prevBtn.addEventListener('click', prevSlide);
+
+      // Indicator clicks
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          showSlide(index);
+        });
+      });
+
+      // Auto-advance carousel (optional)
+      setInterval(nextSlide, 10000); // Change slide every 10 seconds
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          prevSlide();
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+        }
+      });
+    }
+
+    // Add to cart functionality
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const productId = this.getAttribute('data-product-id');
+        addToCart(productId, 1);
+        
+        // Show confirmation
+        this.textContent = 'Added!';
+        setTimeout(() => {
+          this.textContent = 'Add to Order';
+        }, 1500);
+        
+        e.stopPropagation(); // Prevent card click event
+      });
+    });
+    </script>
+    
+    
+    </body></html>
+
+    

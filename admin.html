@@ -3,437 +3,432 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - Crave Restaurant</title>
-  <link rel="stylesheet" href="src/index.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+  <title>Admin Dashboard - FoodTruck</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN+Guides&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div id="navbar-container"></div>
-
-  <div class="admin-container">
-    <div class="admin-sidebar">
-      <div class="admin-header">
-        <h2>Admin Panel</h2>
-        <p>Welcome, Administrator</p>
-      </div>
-      
-      <nav class="admin-nav">
-        <button class="admin-nav-btn active" data-tab="dashboard">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-          Dashboard
-        </button>
-        <button class="admin-nav-btn" data-tab="menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-            <line x1="6" y1="1" x2="6" y2="4"></line>
-            <line x1="10" y1="1" x2="10" y2="4"></line>
-            <line x1="14" y1="1" x2="14" y2="4"></line>
-          </svg>
-          Menu Management
-        </button>
-        <button class="admin-nav-btn" data-tab="reservations">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
-          Reservations
-        </button>
-        <button class="admin-nav-btn" data-tab="orders">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-          Orders
-        </button>
-        <button class="admin-nav-btn" data-tab="analytics">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="20" x2="18" y2="10"></line>
-            <line x1="12" y1="20" x2="12" y2="4"></line>
-            <line x1="6" y1="20" x2="6" y2="14"></line>
-          </svg>
-          Analytics
-        </button>
-        <button class="admin-nav-btn" data-tab="settings">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-          </svg>
-          Settings
-        </button>
-      </nav>
-    </div>
-
-    <div class="admin-main">
-      <!-- Dashboard Tab -->
-      <div class="admin-tab active" id="dashboard">
-        <div class="dashboard-header">
-          <h1>Dashboard</h1>
-          <p>Overview of restaurant operations</p>
-        </div>
-        
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon">📅</div>
-            <div class="stat-content">
-              <h3>Today's Reservations</h3>
-              <p class="stat-number">12</p>
-              <p class="stat-change positive">+3 from yesterday</p>
-            </div>
-          </div>
-          
-          <div class="stat-card">
-            <div class="stat-icon">🍽️</div>
-            <div class="stat-content">
-              <h3>Active Orders</h3>
-              <p class="stat-number">8</p>
-              <p class="stat-change positive">+2 from last hour</p>
-            </div>
-          </div>
-          
-          <div class="stat-card">
-            <div class="stat-icon">💰</div>
-            <div class="stat-content">
-              <h3>Today's Revenue</h3>
-              <p class="stat-number">$2,450</p>
-              <p class="stat-change positive">+15% from yesterday</p>
-            </div>
-          </div>
-          
-          <div class="stat-card">
-            <div class="stat-icon">⭐</div>
-            <div class="stat-content">
-              <h3>Average Rating</h3>
-              <p class="stat-number">4.8</p>
-              <p class="stat-change neutral">No change</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="dashboard-charts">
-          <div class="chart-container">
-            <h3>Weekly Revenue</h3>
-            <div class="chart-placeholder">
-              <p>Chart visualization would go here</p>
-            </div>
-          </div>
-          
-          <div class="chart-container">
-            <h3>Popular Items</h3>
-            <div class="popular-items">
-              <div class="popular-item">
-                <span class="item-name">Jollof Rice</span>
-                <span class="item-count">45 orders</span>
-              </div>
-              <div class="popular-item">
-                <span class="item-name">Grilled Chicken</span>
-                <span class="item-count">32 orders</span>
-              </div>
-              <div class="popular-item">
-                <span class="item-name">Beef Burger</span>
-                <span class="item-count">28 orders</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Menu Management Tab -->
-      <div class="admin-tab" id="menu">
-        <div class="tab-header">
-          <h1>Menu Management</h1>
-          <button class="add-btn" id="addMenuItem">+ Add New Item</button>
-        </div>
-        
-        <div class="menu-categories">
-          <button class="category-btn active" data-category="all">All Items</button>
-          <button class="category-btn" data-category="appetizers">Appetizers</button>
-          <button class="category-btn" data-category="main-courses">Main Courses</button>
-          <button class="category-btn" data-category="desserts">Desserts</button>
-          <button class="category-btn" data-category="beverages">Beverages</button>
-        </div>
-        
-        <div class="menu-items-grid" id="adminMenuGrid">
-          <!-- Menu items will be loaded here -->
-        </div>
-      </div>
-
-      <!-- Reservations Tab -->
-      <div class="admin-tab" id="reservations">
-        <div class="tab-header">
-          <h1>Reservations</h1>
-          <div class="reservation-filters">
-            <select id="reservationFilter">
-              <option value="all">All Reservations</option>
-              <option value="today">Today</option>
-              <option value="upcoming">Upcoming</option>
-              <option value="past">Past</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="reservations-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Guest</th>
-                <th>Date & Time</th>
-                <th>Guests</th>
-                <th>Contact</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="reservationsTableBody">
-              <!-- Reservations will be loaded here -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Orders Tab -->
-      <div class="admin-tab" id="orders">
-        <div class="tab-header">
-          <h1>Orders</h1>
-          <div class="order-filters">
-            <select id="orderFilter">
-              <option value="all">All Orders</option>
-              <option value="pending">Pending</option>
-              <option value="preparing">Preparing</option>
-              <option value="ready">Ready</option>
-              <option value="completed">Completed</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="orders-grid" id="ordersGrid">
-          <!-- Orders will be loaded here -->
-        </div>
-      </div>
-
-      <!-- Analytics Tab -->
-      <div class="admin-tab" id="analytics">
-        <div class="tab-header">
-          <h1>Analytics</h1>
-          <div class="date-range">
-            <input type="date" id="startDate">
-            <span>to</span>
-            <input type="date" id="endDate">
-            <button class="apply-btn">Apply</button>
-          </div>
-        </div>
-        
-        <div class="analytics-grid">
-          <div class="analytics-card">
-            <h3>Revenue Trends</h3>
-            <div class="chart-placeholder">
-              <p>Revenue chart would go here</p>
-            </div>
-          </div>
-          
-          <div class="analytics-card">
-            <h3>Customer Demographics</h3>
-            <div class="chart-placeholder">
-              <p>Demographics chart would go here</p>
-            </div>
-          </div>
-          
-          <div class="analytics-card">
-            <h3>Peak Hours</h3>
-            <div class="chart-placeholder">
-              <p>Peak hours chart would go here</p>
-            </div>
-          </div>
-          
-          <div class="analytics-card">
-            <h3>Popular Items</h3>
-            <div class="chart-placeholder">
-              <p>Popular items chart would go here</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Settings Tab -->
-      <div class="admin-tab" id="settings">
-        <div class="tab-header">
-          <h1>Settings</h1>
-        </div>
-        
-        <div class="settings-grid">
-          <div class="settings-card">
-            <h3>Restaurant Information</h3>
-            <form class="settings-form">
-              <div class="form-group">
-                <label>Restaurant Name</label>
-                <input type="text" value="Crave Restaurant">
-              </div>
-              <div class="form-group">
-                <label>Address</label>
-                <input type="text" value="147 St Darkuman, Accra, Ghana">
-              </div>
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="tel" value="+233 20 123 4567">
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" value="info@crave.com">
-              </div>
-              <button type="submit" class="save-btn">Save Changes</button>
-            </form>
-          </div>
-          
-          <div class="settings-card">
-            <h3>Operating Hours</h3>
-            <form class="settings-form">
-              <div class="hours-row">
-                <span>Monday - Friday</span>
-                <input type="time" value="11:00">
-                <span>to</span>
-                <input type="time" value="22:00">
-              </div>
-              <div class="hours-row">
-                <span>Saturday</span>
-                <input type="time" value="10:00">
-                <span>to</span>
-                <input type="time" value="23:00">
-              </div>
-              <div class="hours-row">
-                <span>Sunday</span>
-                <input type="time" value="12:00">
-                <span>to</span>
-                <input type="time" value="21:00">
-              </div>
-              <button type="submit" class="save-btn">Save Hours</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Add/Edit Menu Item Modal -->
-  <div id="menuModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="modalTitle">Add Menu Item</h3>
-        <button class="close-modal" id="closeMenuModal">×</button>
-      </div>
-      <form id="menuItemForm">
-        <div class="form-group">
-          <label for="itemName">Item Name *</label>
-          <input type="text" id="itemName" required>
-        </div>
-        <div class="form-group">
-          <label for="itemCategory">Category *</label>
-          <select id="itemCategory" required>
-            <option value="">Select Category</option>
-            <option value="appetizers">Appetizers</option>
-            <option value="main-courses">Main Courses</option>
-            <option value="desserts">Desserts</option>
-            <option value="beverages">Beverages</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="itemDescription">Description</label>
-          <textarea id="itemDescription" rows="3"></textarea>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="itemPrice">Price *</label>
-            <input type="number" id="itemPrice" step="0.01" required>
-          </div>
-                  <div class="form-group">
-          <label for="itemImage">Food Image</label>
-          <div class="image-upload-container">
-            <input type="file" id="itemImageFile" accept="image/*" style="display: none;">
-            <div class="image-preview" id="imagePreview">
-              <div class="upload-placeholder">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2">
-                  <path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z"/>
-                  <circle cx="8.5" cy="8.5" r="1.5"/>
-                  <polyline points="21,15 16,10 5,21"/>
-                </svg>
-                <p>Click to upload image</p>
-              </div>
-            </div>
-            <button type="button" class="upload-btn" onclick="document.getElementById('itemImageFile').click()">
-              Choose Image
-            </button>
-            <p class="upload-hint">Recommended size: 400x300px, Max: 2MB</p>
-          </div>
-        </div>
-        </div>
-        <div class="form-group">
-          <label>
-            <input type="checkbox" id="itemAvailable">
-            Available for ordering
-          </label>
-        </div>
-        <div class="modal-actions">
-          <button type="button" class="cancel-btn" id="cancelMenuItem">Cancel</button>
-          <button type="submit" class="save-btn">Save Item</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script src="src/admin.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
-    // Check authentication
-    if (localStorage.getItem('adminLoggedIn') !== 'true') {
-      window.location.href = 'login.html';
-    }
-    
-    // Add logout functionality
-    function logout() {
-      localStorage.removeItem('adminLoggedIn');
-      localStorage.removeItem('adminLoginTime');
-      window.location.href = 'login.html';
-    }
-    
-    // Add logout button to admin header
-    document.addEventListener('DOMContentLoaded', function() {
-      const adminHeader = document.querySelector('.admin-header');
-      if (adminHeader) {
-        const logoutBtn = document.createElement('button');
-        logoutBtn.className = 'logout-btn';
-        logoutBtn.innerHTML = `
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16,17 21,12 16,7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-          Logout
-        `;
-        logoutBtn.onclick = logout;
-        adminHeader.appendChild(logoutBtn);
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter','ui-sans-serif','system-ui'],
+            serif: ['Fraunces','ui-serif','Georgia']
+          },
+          borderRadius: {
+            'xl': '1.5rem',
+            '3xl': '2rem',
+          },
+          boxShadow: {
+            'soft': '0 4px 24px 0 rgba(0,0,0,0.06)',
+          },
+          colors: {
+            primary: '#10b981',
+            accent: '#FF6B35',
+            neutral: {
+              50: '#fafaf9',
+              100: '#f5f5f4',
+              200: '#e7e5e4',
+              300: '#d6d3d1',
+              400: '#a8a29e',
+              500: '#78716c',
+              600: '#57534e',
+              700: '#44403c',
+              800: '#292524',
+              900: '#1c1917',
+            }
+          }
+        }
       }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+    .sidebar-active {
+      background: #fff;
+      color: #10b981;
+      box-shadow: 0 2px 8px 0 rgba(16,185,129,0.08);
+    }
+    .sidebar-icon {
+      width: 1.5rem;
+      display: inline-block;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-900 antialiased overflow-x-hidden">
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white/80 backdrop-blur-xl border-r border-neutral-200/50 rounded-tr-3xl rounded-br-3xl shadow-soft flex flex-col py-10 px-8 mt-8 ml-4 mb-8">
+      <div class="mb-10">
+        <h2 class="text-3xl font-serif font-medium mb-1 tracking-tight">Admin Panel</h2>
+        <div class="text-sm opacity-80 mb-6">Welcome, Administrator</div>
+        <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full font-medium flex items-center gap-2 shadow-soft transition-all"><i class="fa fa-sign-out-alt"></i> Logout</button>
+      </div>
+      <nav class="flex-1">
+        <ul class="space-y-2" id="sidebar-nav">
+          <li><a href="#" data-tab="dashboard" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium sidebar-active transition-all"><span class="sidebar-icon"><i class="fa fa-home"></i></span>Dashboard</a></li>
+          <li><a href="#" data-tab="menu" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-utensils"></i></span>Menu Management</a></li>
+          <li><a href="#" data-tab="reservations" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-calendar-alt"></i></span>Reservations</a></li>
+          <li><a href="#" data-tab="orders" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-shopping-cart"></i></span>Orders</a></li>
+          <li><a href="#" data-tab="analytics" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-chart-line"></i></span>Analytics</a></li>
+          <li><a href="#" data-tab="settings" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-cog"></i></span>Settings</a></li>
+      </ul>
+      </nav>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 p-10 md:p-16">
+      <!-- Dashboard Tab -->
+      <section id="tab-dashboard" class="admin-tab-section">
+        <h1 class="text-5xl font-serif font-medium mb-2 tracking-tight">Dashboard</h1>
+        <div class="text-neutral-500 mb-10 text-lg">Overview of restaurant operations</div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col items-start">
+            <div class="text-3xl mb-3 text-accent"><i class="fa fa-calendar-alt"></i></div>
+            <div class="text-4xl font-bold font-serif mb-1" id="summary-reservations">12</div>
+            <div class="text-neutral-600 font-medium">Today's Reservations</div>
+            <div class="text-green-500 text-sm mt-2">+3 from yesterday</div>
+          </div>
+          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col items-start">
+            <div class="text-3xl mb-3 text-accent"><i class="fa fa-utensils"></i></div>
+            <div class="text-4xl font-bold font-serif mb-1" id="summary-active-orders">0</div>
+            <div class="text-neutral-600 font-medium">Active Orders</div>
+            <div class="text-green-500 text-sm mt-2" id="active-orders-delta">+0 from last hour</div>
+          </div>
+          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col items-start">
+            <div class="text-3xl mb-3 text-accent"><i class="fa fa-money-bill-wave"></i></div>
+            <div class="text-4xl font-bold font-serif mb-1" id="summary-revenue">$0</div>
+            <div class="text-neutral-600 font-medium">Today's Revenue</div>
+            <div class="text-green-500 text-sm mt-2" id="revenue-delta">+0% from yesterday</div>
+          </div>
+          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col items-start">
+            <div class="text-3xl mb-3 text-accent"><i class="fa fa-star"></i></div>
+            <div class="text-4xl font-bold font-serif mb-1" id="summary-rating">4.8</div>
+            <div class="text-neutral-600 font-medium">Average Rating</div>
+            <div class="text-neutral-500 text-sm mt-2">No change</div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-3xl shadow-soft p-8 col-span-2 flex flex-col">
+            <div class="font-semibold mb-4 text-lg">Weekly Revenue</div>
+            <canvas id="weeklyRevenueChart" height="120"></canvas>
+          </div>
+          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col">
+            <div class="font-semibold mb-4 text-lg">Popular Items</div>
+            <div id="popular-items-list"></div>
+          </div>
+        </div>
+      </section>
+      <!-- Menu Management Tab -->
+      <section id="tab-menu" class="admin-tab-section hidden">
+        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Menu Management</h2>
+        <form id="add-product-form" class="mb-8 flex flex-wrap gap-4 items-end">
+          <input type="text" id="prod-name" placeholder="Name" required class="border border-neutral-200 rounded-full px-5 py-3">
+          <input type="number" id="prod-price" placeholder="Price" step="0.01" required class="border border-neutral-200 rounded-full px-5 py-3">
+          <input type="text" id="prod-category" placeholder="Category" required class="border border-neutral-200 rounded-full px-5 py-3">
+          <input type="file" id="prod-image-file" accept="image/*" class="border border-neutral-200 rounded-full px-5 py-3 bg-white">
+          <input type="hidden" id="prod-image">
+          <img id="prod-image-preview" src="" alt="Preview" class="w-16 h-16 object-cover rounded-xl border border-neutral-200 ml-2 hidden">
+          <button type="submit" class="bg-accent text-white px-6 py-3 rounded-full font-medium shadow-soft hover:bg-orange-600 transition">Add Product</button>
+        </form>
+        <input type="text" id="product-search" placeholder="Search products..." class="mb-6 border border-neutral-200 rounded-full px-5 py-3 w-full max-w-xs">
+        <div id="product-list-admin" class="overflow-x-auto"></div>
+      </section>
+      <!-- Orders Tab -->
+      <section id="tab-orders" class="admin-tab-section hidden">
+        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Orders</h2>
+        <div class="mb-6 flex gap-4 items-center">
+          <label class="font-medium">Status:</label>
+          <select id="order-filter" class="border border-neutral-200 rounded-full px-4 py-2">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="fulfilled">Fulfilled</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button id="mark-all-fulfilled" class="bg-primary text-white px-5 py-2 rounded-full font-medium shadow-soft hover:bg-emerald-700 transition">Mark All as Fulfilled</button>
+        </div>
+        <div id="order-list-admin" class="overflow-x-auto"></div>
+      </section>
+      <!-- Reservations Tab (Demo) -->
+      <section id="tab-reservations" class="admin-tab-section hidden">
+        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Reservations</h2>
+        <div class="text-neutral-500">(Demo section. Add your reservations management here.)</div>
+      </section>
+      <!-- Analytics Tab (Demo) -->
+      <section id="tab-analytics" class="admin-tab-section hidden">
+        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Analytics</h2>
+        <div class="text-neutral-500">(Demo section. Add your analytics here.)</div>
+      </section>
+      <!-- Settings Tab (Demo) -->
+      <section id="tab-settings" class="admin-tab-section hidden">
+        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Settings</h2>
+        <div class="text-neutral-500">(Demo section. Add your settings here.)</div>
+    </section>
+  </main>
+  </div>
+  <script src="user.js"></script>
+  <script src="products.js"></script>
+  <script src="orders.js"></script>
+  <script>
+    // Sidebar tab navigation
+    document.querySelectorAll('#sidebar-nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('#sidebar-nav a').forEach(l => l.classList.remove('sidebar-active'));
+        this.classList.add('sidebar-active');
+        document.querySelectorAll('.admin-tab-section').forEach(sec => sec.classList.add('hidden'));
+        document.getElementById('tab-' + this.getAttribute('data-tab')).classList.remove('hidden');
+        if (this.getAttribute('data-tab') === 'menu') renderAdminProducts();
+        if (this.getAttribute('data-tab') === 'orders') renderAdminOrders();
+      });
     });
-    
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-container').innerHTML = data;
-        // Update active nav link
-        const adminLink = document.querySelector('a[href="#"]');
-        if (adminLink && adminLink.textContent === 'Admin') {
-          adminLink.href = 'admin.html';
-          adminLink.classList.add('active');
+
+    // --- Dashboard Data Logic ---
+    function getTodayOrders() {
+      const orders = getAllOrders();
+      const today = new Date().toISOString().slice(0, 10);
+      return orders.filter(o => o.timestamp && o.timestamp.slice(0, 10) === today);
+    }
+    function getActiveOrders() {
+      return getAllOrders().filter(o => o.status === 'pending');
+    }
+    function getTodayRevenue() {
+      return getTodayOrders().reduce((sum, o) => sum + o.total, 0);
+    }
+    function getPopularItems() {
+      const orders = getAllOrders();
+      const count = {};
+      orders.forEach(order => {
+        order.items.forEach(item => {
+          count[item.productId] = (count[item.productId] || 0) + item.quantity;
+        });
+      });
+      const products = getProducts();
+      const items = Object.entries(count).map(([pid, qty]) => {
+        const prod = products.find(p => p.id === pid);
+        return prod ? { name: prod.name, qty } : null;
+      }).filter(Boolean);
+      items.sort((a, b) => b.qty - a.qty);
+      return items.slice(0, 3);
+    }
+    function getRevenueLast7Days() {
+      const orders = getAllOrders();
+      const days = [];
+      const today = new Date();
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const key = d.toISOString().slice(0, 10);
+        days.push(key);
+      }
+      const revenue = days.map(day => {
+        return orders.filter(o => o.timestamp && o.timestamp.slice(0, 10) === day).reduce((sum, o) => sum + o.total, 0);
+      });
+      return { days, revenue };
+    }
+    function renderDashboard() {
+      document.getElementById('summary-reservations').textContent = 12;
+      const activeOrders = getActiveOrders();
+      document.getElementById('summary-active-orders').textContent = activeOrders.length;
+      document.getElementById('active-orders-delta').textContent = `+${activeOrders.length} from last hour`;
+      const revenue = getTodayRevenue();
+      document.getElementById('summary-revenue').textContent = `$${revenue.toLocaleString()}`;
+      document.getElementById('revenue-delta').textContent = `+15% from yesterday`;
+      document.getElementById('summary-rating').textContent = 4.8;
+      const popular = getPopularItems();
+      const list = document.getElementById('popular-items-list');
+      if (!popular.length) {
+        list.innerHTML = '<div class="text-neutral-400">No orders yet</div>';
+      } else {
+        list.innerHTML = popular.map(item => `<div class="flex justify-between items-center mb-2"><span class="bg-neutral-100 rounded px-3 py-1">${item.name}</span><span class="text-neutral-500 text-sm">${item.qty} orders</span></div>`).join('');
+      }
+      // Chart
+      const ctx = document.getElementById('weeklyRevenueChart').getContext('2d');
+      const { days, revenue: revs } = getRevenueLast7Days();
+      if (window._revenueChart) window._revenueChart.destroy();
+      window._revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: days.map(d => d.slice(5)),
+          datasets: [{
+            label: 'Revenue',
+            data: revs,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,0.1)',
+            tension: 0.4,
+            fill: true,
+            pointRadius: 4,
+            pointBackgroundColor: '#10b981',
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, ticks: { callback: v => '$' + v } }
+          }
         }
       });
+    }
+    // --- Menu Management (Product CRUD) ---
+    function renderAdminProducts(filter = '') {
+      const list = document.getElementById('product-list-admin');
+      let products = getProducts();
+      if (filter) {
+        products = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase()));
+      }
+      if (!products.length) {
+        list.innerHTML = '<p class="text-neutral-500">No products found.</p>';
+        return;
+      }
+      let html = '<table class="w-full text-left"><thead><tr><th>Image</th><th>Name</th><th>Price</th><th>Category</th><th></th></tr></thead><tbody>';
+      products.forEach(product => {
+        html += `<tr>
+          <td><img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded shadow"></td>
+          <td>${product.name}</td>
+          <td>$${product.price.toFixed(2)}</td>
+          <td>${product.category}</td>
+          <td>
+            <button class="edit-prod-btn text-blue-600 mr-2" data-pid="${product.id}" title="Edit"><span>✏️</span></button>
+            <button class="delete-prod-btn text-red-600" data-pid="${product.id}" title="Delete"><span>🗑️</span></button>
+          </td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      list.innerHTML = html;
+      document.querySelectorAll('.delete-prod-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (confirm('Delete this product?')) {
+            deleteProduct(this.getAttribute('data-pid'));
+            renderAdminProducts(document.getElementById('product-search').value);
+          }
+        });
+      });
+      document.querySelectorAll('.edit-prod-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const pid = this.getAttribute('data-pid');
+          const prod = getProductById(pid);
+          if (!prod) return;
+          const name = prompt('Product name:', prod.name);
+          const price = parseFloat(prompt('Product price:', prod.price));
+          const image = prompt('Image URL:', prod.image);
+          const category = prompt('Category:', prod.category);
+          if (name && !isNaN(price) && image && category) {
+            updateProduct(pid, { name, price, image, category });
+            renderAdminProducts(document.getElementById('product-search').value);
+          }
+        });
+      });
+    }
+    // Image upload and preview for Menu Management
+    const imageFileInput = document.getElementById('prod-image-file');
+    const imageHiddenInput = document.getElementById('prod-image');
+    const imagePreview = document.getElementById('prod-image-preview');
+    imageFileInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imageHiddenInput.value = e.target.result;
+          imagePreview.src = e.target.result;
+          imagePreview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        imageHiddenInput.value = '';
+        imagePreview.src = '';
+        imagePreview.classList.add('hidden');
+      }
+    });
+    // Update add product logic to use uploaded image
+    document.getElementById('add-product-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('prod-name').value.trim();
+      const price = parseFloat(document.getElementById('prod-price').value);
+      const image = document.getElementById('prod-image').value.trim();
+      const category = document.getElementById('prod-category').value.trim();
+      if (name && !isNaN(price) && category) {
+        addProduct({ name, price, image: image || 'images/jollofrice.png', category });
+        renderAdminProducts(document.getElementById('product-search').value);
+        this.reset();
+        imagePreview.src = '';
+        imagePreview.classList.add('hidden');
+      }
+    });
+    document.getElementById('product-search').addEventListener('input', function() {
+      renderAdminProducts(this.value);
+    });
+    // --- Orders Management ---
+    function renderAdminOrders() {
+      const list = document.getElementById('order-list-admin');
+      const filter = document.getElementById('order-filter').value;
+      let orders = getAllOrders();
+      if (filter !== 'all') {
+        orders = orders.filter(o => o.status === filter);
+      }
+      if (!orders.length) {
+        list.innerHTML = '<p class="text-neutral-500">No orders found.</p>';
+        return;
+      }
+      let html = '<table class="w-full text-left"><thead><tr><th>User</th><th>Total</th><th>Status</th><th>Time</th><th>Details</th></tr></thead><tbody>';
+      orders.forEach(order => {
+        let badgeClass = 'bg-gray-200 text-gray-800';
+        if (order.status === 'pending') badgeClass = 'bg-yellow-200 text-yellow-800';
+        if (order.status === 'fulfilled') badgeClass = 'bg-emerald-200 text-emerald-800';
+        if (order.status === 'cancelled') badgeClass = 'bg-red-200 text-red-800';
+        html += `<tr>
+          <td>${order.user}</td>
+          <td>$${order.total.toFixed(2)}</td>
+          <td><span class="px-2 py-1 rounded text-xs font-semibold ${badgeClass}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span></td>
+          <td>${new Date(order.timestamp).toLocaleString()}</td>
+          <td><button class="expand-order-btn text-emerald-600 underline" data-oid="${order.id}">Expand</button></td>
+        </tr>
+        <tr class="order-details-row" id="details-${order.id}" style="display:none;"><td colspan="5">
+          <div class="p-4 bg-neutral-50 rounded-xl border mt-2">
+            <b>Items:</b><br>
+            ${order.items.map(i => {
+              const p = getProductById(i.productId);
+              return p ? `<span class="inline-block mr-2">${p.name} <span class="text-xs text-neutral-500">(x${i.quantity})</span></span>` : '';
+            }).join(' ')}
+            <br><b>Status:</b> <select class="order-status" data-oid="${order.id}">
+              <option value="pending"${order.status==='pending'?' selected':''}>Pending</option>
+              <option value="fulfilled"${order.status==='fulfilled'?' selected':''}>Fulfilled</option>
+              <option value="cancelled"${order.status==='cancelled'?' selected':''}>Cancelled</option>
+            </select>
+          </div>
+        </td></tr>`;
+      });
+      html += '</tbody></table>';
+      list.innerHTML = html;
+      document.querySelectorAll('.expand-order-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const oid = this.getAttribute('data-oid');
+          const row = document.getElementById('details-' + oid);
+          row.style.display = row.style.display === 'none' ? '' : 'none';
+        });
+      });
+      document.querySelectorAll('.order-status').forEach(sel => {
+        sel.addEventListener('change', function() {
+          updateOrderStatus(this.getAttribute('data-oid'), this.value);
+          renderAdminOrders();
+        });
+      });
+    }
+    document.getElementById('order-filter').addEventListener('change', renderAdminOrders);
+    document.getElementById('mark-all-fulfilled').addEventListener('click', function() {
+      let orders = getAllOrders();
+      orders.forEach(o => { if (o.status === 'pending') updateOrderStatus(o.id, 'fulfilled'); });
+      renderAdminOrders();
+    });
+    // Initial render
+    document.addEventListener('DOMContentLoaded', function() {
+      renderDashboard();
+    });
+    // Logout
+    document.getElementById('logout-btn').onclick = () => { logoutUser(); window.location.href = 'signin.html'; };
   </script>
 </body>
 </html> 

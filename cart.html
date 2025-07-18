@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - FoodTruck</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-50 text-neutral-900 antialiased" style="padding-top: 120px;">
+  <foodtruck-navbar active="cart"></foodtruck-navbar>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-12">
+      <h1 class="text-5xl font-serif font-bold tracking-tight">Your Cart</h1>
+      <p class="mt-4 text-lg text-neutral-600">Review your items and proceed to checkout.</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="md:col-span-2 bg-white rounded-2xl shadow-lg p-8">
+        <h2 class="text-2xl font-serif font-medium mb-6">Cart Items</h2>
+        <div id="cart-items" class="divide-y divide-neutral-200"></div>
+        <div id="cart-message" class="mt-6 text-red-600"></div>
+      </div>
+      <div class="md:col-span-1">
+        <div class="sticky top-32 bg-white rounded-2xl shadow-lg p-8">
+          <h2 class="text-2xl font-serif font-medium mb-6">Summary</h2>
+          <div class="space-y-4">
+            <div class="flex justify-between">
+              <span class="text-neutral-600">Subtotal</span>
+              <span id="cart-subtotal" class="font-medium">$0.00</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-neutral-600">Tax (10%)</span>
+              <span id="cart-tax" class="font-medium">$0.00</span>
+            </div>
+            <div class="border-t border-neutral-200 pt-4 mt-4 flex justify-between items-center">
+              <span class="text-xl font-bold">Total</span>
+              <span id="cart-total" class="text-xl font-bold">$0.00</span>
+            </div>
+          </div>
+          <button id="checkout-btn" class="mt-8 w-full bg-emerald-600 text-white px-6 py-4 rounded-full font-medium text-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105">
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-container" class="mt-24"></div>
+
+  <script src="navbar.js"></script>
+  <script src="foodtruck-navbar.js"></script>
+  <script src="user.js"></script>
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <script src="orders.js"></script>
+  <script>
+    // Load footer.html into the footer-container
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('footer-container').innerHTML = html;
+      });
+
+    // --- Cart rendering and logic ---
+    function renderCart() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      const cart = getCart();
+      if (!cart.length) {
+        cartItemsDiv.innerHTML = '<p class="text-neutral-500">Your cart is empty.</p>';
+        document.getElementById('cart-total').textContent = '$0.00';
+        return;
+      }
+      let html = '<table class="w-full text-left"><thead><tr class="border-b border-neutral-200"><th class="py-3 font-medium uppercase text-sm text-neutral-500">Item</th><th class="py-3 font-medium uppercase text-sm text-neutral-500">Qty</th><th class="py-3 font-medium uppercase text-sm text-neutral-500">Price</th><th class="py-3"></th></tr></thead><tbody>';
+      cart.forEach(item => {
+        const product = getProductById(item.productId);
+        if (!product) return;
+        html += `<tr class="border-b border-neutral-200">
+          <td class="py-4 flex items-center">
+            <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded-lg mr-4">
+            <div>
+              <p class="font-medium">${product.name}</p>
+              <p class="text-sm text-neutral-500">${product.category}</p>
+            </div>
+          </td>
+          <td class="py-4">
+            <input type="number" min="1" value="${item.quantity}" data-pid="${item.productId}" class="cart-qty w-20 border border-neutral-300 rounded-lg px-2 py-2 text-center focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </td>
+          <td class="py-4 font-medium">$${(product.price * item.quantity).toFixed(2)}</td>
+          <td class="py-4 text-right">
+            <button class="remove-btn text-neutral-500 hover:text-red-600 transition-colors" data-pid="${item.productId}" title="Remove item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+          </td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      cartItemsDiv.innerHTML = html;
+      
+      const subtotal = getCartTotal();
+      const tax = subtotal * 0.10;
+      const total = subtotal + tax;
+      
+      document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('cart-tax').textContent = `$${tax.toFixed(2)}`;
+      document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+
+      // Quantity change
+      document.querySelectorAll('.cart-qty').forEach(input => {
+        input.addEventListener('change', function() {
+          const pid = this.getAttribute('data-pid');
+          let qty = parseInt(this.value);
+          if (isNaN(qty) || qty < 1) qty = 1;
+          updateCartItem(pid, qty);
+          renderCart();
+        });
+      });
+      // Remove button
+      document.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const pid = this.getAttribute('data-pid');
+          removeFromCart(pid);
+          renderCart();
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCart();
+      document.getElementById('checkout-btn').addEventListener('click', function() {
+        const msg = document.getElementById('cart-message');
+        const result = placeOrder();
+        if (result.success) {
+          msg.style.color = 'green';
+          msg.textContent = 'Order placed successfully!';
+          renderCart();
+        } else {
+          msg.style.color = 'red';
+          msg.textContent = result.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

@@ -153,6 +153,14 @@
     </div>
   </div>
 
+  <div id="footer-container"></div>
+  <script>
+    fetch('src/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      });
+  </script>
   <script src="src/reservation.js"></script>
   <script>
     fetch('navbar.html')

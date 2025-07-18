@@ -1,206 +1,252 @@
-# Crave Restaurant Website
+# FoodTruck Website - Navbar Component
 
-A modern, responsive restaurant website with full admin functionality for managing menus, reservations, and restaurant operations.
+This project includes a reusable navbar component that can be easily integrated into any page of the FoodTruck website.
 
-## Features
+## Files Created
 
-### Customer-Facing Features
+- `navbar.html` - Static HTML version of the navbar
+- `navbar.js` - JavaScript class for dynamic navbar functionality
+- `navbar-usage.html` - Example file showing different usage scenarios
+- `README.md` - This documentation file
 
-#### 🏠 Home Page
-- Beautiful landing page with animated elements
-- Restaurant motto and branding
-- Contact information and social media links
-- Customer ratings and reviews
-- Call-to-action buttons
+## Navbar Component Features
 
-#### 🍽️ Menu Page
-- Interactive menu with category filtering
-- Beautiful food item cards with images and descriptions
-- Shopping cart functionality
-- Add to cart with quantity controls
-- Real-time cart updates
-- Checkout process
+### Core Features
+- **Responsive Design**: Works on desktop and mobile devices
+- **Customizable Brand**: Change brand name and link
+- **Dynamic Menu Items**: Add, remove, or modify navigation links
+- **Interactive Elements**: Search, cart, and user profile buttons
+- **Cart Counter**: Display number of items in cart
+- **Active State Management**: Highlight current page
+- **Event Handlers**: Customizable click events for all interactive elements
 
-#### 📖 About Page
-- Restaurant story and history
-- Core values and mission
-- Team member profiles
-- Professional presentation
+### Visual Features
+- **Glass Morphism**: Backdrop blur effect with transparency
+- **Hover Animations**: Smooth transitions on all interactive elements
+- **Underline Effects**: Animated underlines on menu items
+- **Icon Animations**: Scale effects on button hover
+- **Fixed Positioning**: Stays at top of page during scroll
 
-#### 📅 Reservation System
-- Easy-to-use reservation form
-- Date and time selection
-- Guest count and occasion options
-- Special requests field
-- Form validation
-- Success confirmation
-- Restaurant hours and policies
+## Usage
 
-### Admin Panel Features
+### Basic Usage
 
-#### 📊 Dashboard
-- Real-time statistics overview
-- Today's reservations count
-- Active orders tracking
-- Revenue analytics
-- Popular menu items
-- Performance metrics
+```html
+<!-- Include the navbar script -->
+<script src="navbar.js"></script>
 
-#### 🍴 Menu Management
-- Add new menu items
-- Edit existing items
-- Delete items
-- Category organization
-- Price management
-- Availability toggle
-- Image upload support
+<!-- Add a container for the navbar -->
+<div id="navbar-container"></div>
 
-#### 📋 Reservation Management
-- View all reservations
-- Filter by date (today, upcoming, past)
-- Reservation details
-- Status management
-- Delete reservations
-- Contact information
+<!-- Initialize the navbar -->
+<script>
+const navbar = new Navbar({
+  containerId: 'navbar-container',
+  brandName: 'FoodTruck',
+  cartCount: 2
+});
+</script>
+```
 
-#### 📦 Order Management
-- Track order status
-- Update order progress
-- Customer information
-- Order details
-- Status workflow (pending → preparing → ready → completed)
+### Advanced Usage with Custom Options
 
-#### 📈 Analytics
-- Revenue trends
-- Customer demographics
-- Peak hours analysis
-- Popular items tracking
-- Date range filtering
-- Performance insights
+```javascript
+const navbar = new Navbar({
+  containerId: 'navbar-container',
+  brandName: 'FoodTruck Pro',
+  brandLink: '/home',
+  menuItems: [
+    { text: 'Home', link: '/', active: true },
+    { text: 'Menu', link: '/menu', active: false },
+    { text: 'About', link: '/about', active: false },
+    { text: 'Contact', link: '/contact', active: false }
+  ],
+  showSearch: true,
+  showCart: true,
+  showUser: true,
+  cartCount: 5
+});
+```
 
-#### ⚙️ Settings
-- Restaurant information management
-- Operating hours configuration
-- Contact details
-- Business settings
+### Configuration Options
 
-## Technical Features
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `containerId` | string | 'navbar-container' | ID of the container element |
+| `brandName` | string | 'FoodTruck' | Brand/logo text |
+| `brandLink` | string | '#' | Link for brand/logo |
+| `menuItems` | array | Default menu items | Array of menu item objects |
+| `showSearch` | boolean | true | Show/hide search button |
+| `showCart` | boolean | true | Show/hide cart button |
+| `showUser` | boolean | true | Show/hide user button |
+| `cartCount` | number | 0 | Number of items in cart |
 
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- **Modern UI/UX**: Clean, professional design with smooth animations
-- **Local Storage**: Data persistence using browser localStorage
-- **Form Validation**: Comprehensive client-side validation
-- **Real-time Updates**: Dynamic content updates without page refresh
-- **Cross-browser Compatible**: Works on all modern browsers
+### Menu Item Structure
+
+```javascript
+{
+  text: 'Menu Item Text',
+  link: '/menu-link',
+  active: false // true for current page
+}
+```
+
+## Methods
+
+### Public Methods
+
+#### `updateCartCount(count)`
+Update the cart item count.
+
+```javascript
+navbar.updateCartCount(5);
+```
+
+#### `updateMenuItems(menuItems)`
+Update the menu items array.
+
+```javascript
+navbar.updateMenuItems([
+  { text: 'Dashboard', link: '/dashboard', active: true },
+  { text: 'Orders', link: '/orders', active: false }
+]);
+```
+
+#### `setActiveMenuItem(index)`
+Set which menu item is currently active.
+
+```javascript
+navbar.setActiveMenuItem(2); // Set third item as active
+```
+
+### Event Handlers
+
+You can override these methods to add custom functionality:
+
+```javascript
+// Search button click
+navbar.onSearchClick = function() {
+  // Your search logic here
+  console.log('Search clicked!');
+};
+
+// Cart button click
+navbar.onCartClick = function() {
+  // Your cart logic here
+  console.log('Cart clicked!');
+};
+
+// User button click
+navbar.onUserClick = function() {
+  // Your user profile logic here
+  console.log('User clicked!');
+};
+
+// Menu item click
+navbar.onMenuItemClick = function(item, index, event) {
+  // Your navigation logic here
+  console.log(`Navigating to: ${item.text}`);
+  event.preventDefault(); // Prevent default if needed
+};
+```
+
+## Examples
+
+### Example 1: Default Navbar
+```javascript
+const navbar = new Navbar({
+  containerId: 'navbar-container'
+});
+```
+
+### Example 2: Custom Menu Items
+```javascript
+const navbar = new Navbar({
+  containerId: 'navbar-container',
+  menuItems: [
+    { text: 'Home', link: '#', active: true },
+    { text: 'Menu', link: '#', active: false },
+    { text: 'About', link: '#', active: false },
+    { text: 'Locations', link: '#', active: false },
+    { text: 'Contact', link: '#', active: false }
+  ]
+});
+```
+
+### Example 3: Without Search Button
+```javascript
+const navbar = new Navbar({
+  containerId: 'navbar-container',
+  showSearch: false,
+  brandName: 'FoodTruck Lite'
+});
+```
+
+### Example 4: With Cart Count
+```javascript
+const navbar = new Navbar({
+  containerId: 'navbar-container',
+  cartCount: 5,
+  brandName: 'FoodTruck Pro'
+});
+```
+
+## Integration with Main Site
+
+The navbar component has been integrated into the main `index.html` file. The navbar is initialized in the `DOMContentLoaded` event with the following configuration:
+
+```javascript
+const navbar = new Navbar({
+  containerId: 'navbar-container',
+  brandName: 'FoodTruck',
+  cartCount: 2,
+  menuItems: [
+    { text: 'Home', link: '#', active: true },
+    { text: 'Store', link: '#', active: false },
+    { text: 'Contact Us', link: '#', active: false },
+    { text: 'Track Orders', link: '#', active: false }
+  ]
+});
+```
+
+## Browser Compatibility
+
+The navbar component works in all modern browsers that support:
+- ES6 Classes
+- Template Literals
+- Arrow Functions
+- CSS Grid and Flexbox
+- CSS Backdrop Filter (for glass morphism effect)
+
+## Dependencies
+
+- **Tailwind CSS**: For styling (included via CDN)
+- **Lucide Icons**: For SVG icons (included via CDN)
+
+## Customization
+
+### Styling
+The navbar uses Tailwind CSS classes. You can customize the appearance by modifying the classes in the `generateHTML()` method of the Navbar class.
+
+### Adding New Features
+To add new features, extend the Navbar class or modify the existing methods. The component is designed to be easily extensible.
 
 ## File Structure
 
 ```
-webpage/
-├── index.html              # Home page
-├── menu.html               # Menu page with cart
-├── about.html              # About page
-├── reservation.html        # Reservation system
-├── admin.html              # Admin panel
-├── navbar.html             # Navigation component
-├── README.md               # Documentation
-└── src/
-    ├── index.css           # Main stylesheet
-    ├── menu.js             # Menu and cart functionality
-    ├── reservation.js      # Reservation system
-    ├── admin.js            # Admin panel functionality
-    └── images/
-        ├── burger.png      # Food images
-        ├── collage.png
-        ├── jollof.png
-        └── stats.png
+foodtruck/
+├── index.html          # Main website with integrated navbar
+├── navbar.html         # Static navbar HTML
+├── navbar.js           # Navbar component JavaScript
+├── navbar-usage.html   # Usage examples
+├── README.md           # This documentation
+└── styles.css          # External styles (if any)
 ```
 
-## Getting Started
+## Contributing
 
-1. **Download/Clone** the project files
-2. **Open** `index.html` in your web browser
-3. **Navigate** through the different pages using the navigation menu
-4. **Access Admin Panel** by clicking "Admin" in the navigation
-
-## Usage Guide
-
-### For Customers
-
-1. **Browse Menu**: Visit the Menu page to see all available dishes
-2. **Add to Cart**: Click "Add to Cart" on any menu item
-3. **View Cart**: Click the cart icon in the navigation to see your order
-4. **Make Reservations**: Use the Reservation page to book a table
-5. **Learn About Us**: Visit the About page to learn more about the restaurant
-
-### For Administrators
-
-1. **Access Admin Panel**: Click "Admin" in the navigation
-2. **Dashboard**: View real-time statistics and performance metrics
-3. **Manage Menu**: Add, edit, or delete menu items
-4. **Handle Reservations**: View and manage customer reservations
-5. **Track Orders**: Monitor order status and update progress
-6. **Analytics**: Review business performance and trends
-7. **Settings**: Update restaurant information and operating hours
-
-## Admin Panel Tabs
-
-- **Dashboard**: Overview of restaurant operations
-- **Menu Management**: Add, edit, and delete menu items
-- **Reservations**: View and manage customer bookings
-- **Orders**: Track and update order status
-- **Analytics**: Business performance insights
-- **Settings**: Restaurant configuration
-
-## Data Storage
-
-The website uses browser localStorage for data persistence:
-- Menu items are stored in `craveMenuItems`
-- Reservations are stored in `craveReservations`
-- Cart data is stored in `craveCart`
-
-## Customization
-
-### Colors and Branding
-The website uses a consistent color scheme:
-- Primary: #FF9900 (Orange)
-- Secondary: #222 (Dark Gray)
-- Accent: #FFB347 (Light Orange)
-
-### Adding Menu Items
-1. Go to Admin Panel → Menu Management
-2. Click "Add New Item"
-3. Fill in the details (name, category, description, price, image)
-4. Save the item
-
-### Modifying Restaurant Information
-1. Go to Admin Panel → Settings
-2. Update restaurant details, hours, or contact information
-3. Save changes
-
-## Browser Compatibility
-
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
-- Mobile browsers
-
-## Future Enhancements
-
-- Backend integration with database
-- Payment processing
-- Email notifications
-- Advanced analytics
-- Customer accounts
-- Online ordering system
-- Inventory management
-- Staff management
-
-## Support
-
-For technical support or questions about the website functionality, please refer to the documentation or contact the development team.
-
----
-
-**Note**: This is a frontend-only implementation using localStorage for data persistence. For production use, consider integrating with a backend server and database for secure data storage and management. 
+To modify the navbar component:
+1. Edit the `navbar.js` file for functionality changes
+2. Update the `navbar.html` file for static HTML changes
+3. Test with the `navbar-usage.html` file
+4. Update this README if adding new features 

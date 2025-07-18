@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us • FoodTruck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter','ui-sans-serif','system-ui'],
+                    serif: ['Fraunces','ui-serif','Georgia']
+                },
+                animation: {
+                    'float': 'float 6s ease-in-out infinite',
+                    'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    'scale-in': 'scaleIn 0.6s ease-out forwards'
+                },
+                keyframes: {
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0px)' },
+                        '50%': { transform: 'translateY(-10px)' }
+                    },
+                    fadeInUp: {
+                        '0%': { opacity: '0', transform: 'translateY(30px)' },
+                        '100%': { opacity: '1', transform: 'translateY(0)' }
+                    },
+                    scaleIn: {
+                        '0%': { opacity: '0', transform: 'scale(0.9)' },
+                        '100%': { opacity: '1', transform: 'scale(1)' }
+                    }
+                }
+            }
+        }
+    }
+    </script>
+</head>
+<body class="bg-neutral-50 text-neutral-900 antialiased overflow-x-hidden">
+
+<!-- CURSOR FOLLOWER -->
+<div id="cursor" class="fixed w-6 h-6 bg-black/20 rounded-full pointer-events-none z-50 mix-blend-difference transition-all duration-300 ease-out"></div>
+
+<!-- NAVBAR COMPONENT -->
+<foodtruck-navbar active="contact" cart="0"></foodtruck-navbar>
+
+<!-- TOP SECTION - Contact Header -->
+<section class="relative pt-32 pb-16 bg-gradient-to-br from-amber-50 via-neutral-50 to-orange-50" data-reveal="">
+    <div class="max-w-6xl mx-auto px-8 text-center">
+        <div class="mb-8">
+            <h1 class="text-5xl lg:text-6xl font-serif font-medium mb-4">
+                Contact 
+                <span class="relative">
+                    Us
+                    <div class="absolute -bottom-2 left-0 w-full h-1 bg-orange-500 rounded-full transform -skew-x-12"></div>
+                </span>
+            </h1>
+            <p class="text-xl text-neutral-700 mb-6">We'd love to hear from you</p>
+            <p class="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+                Get in touch with our friendly team. We're here to help with any questions about our delicious jollof rice and services.
+            </p>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-orange-500">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-serif font-medium text-neutral-800 mb-2">10K+</div>
+                    <div class="text-neutral-600 font-medium">Happy Customers</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-orange-500">
+                            <polygon points="12 2 15.09 8.26 22 9 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-serif font-medium text-neutral-800 mb-2">500+</div>
+                    <div class="text-neutral-600 font-medium">5-Star Reviews</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-orange-500">
+                            <path d="M22 2L11 13"></path>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-serif font-medium text-neutral-800 mb-2">&lt; 1hr</div>
+                    <div class="text-neutral-600 font-medium">Quick Response</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MIDDLE SECTION - Keep In Touch -->
+<section class="relative py-20" data-reveal="">
+    <div class="max-w-6xl mx-auto px-8">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-900 shadow-2xl">
+            <!-- Background Image Overlay -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&q=80');"></div>
+            
+            <div class="relative z-10 p-12 lg:p-16">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl lg:text-5xl font-serif font-medium text-white mb-6">
+                        Keep In Touch 
+                        <span class="text-orange-400">With Us</span>
+                    </h2>
+                    <p class="text-xl text-neutral-200 mb-8 leading-relaxed">
+                        Whether you need help with an order, have questions about our delicious jollof rice, or want to share feedback, we're here to help.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="group flex items-center justify-center gap-3 px-8 py-4 bg-orange-500 text-white rounded-full font-medium hover:bg-orange-600 transition-all duration-300 hover:scale-105" id="emailBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            Email Us
+                        </button>
+                        <button class="group flex items-center justify-center gap-3 px-8 py-4 bg-neutral-700 text-white rounded-full font-medium hover:bg-neutral-600 transition-all duration-300 hover:scale-105" id="callBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            Call Us
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BOTTOM SECTION - Contact Details -->
+<section class="relative py-20 bg-gradient-to-br from-amber-50 via-neutral-50 to-orange-50" data-reveal="">
+    <div class="max-w-6xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Email Us Card -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-orange-500">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium text-neutral-800 mb-3">Email Us</h3>
+                    <p class="text-orange-500 font-medium mb-2">support@didijollof.store</p>
+                    <p class="text-neutral-500 text-sm">Send us an email anytime</p>
+                </div>
+            </div>
+
+            <!-- Call Us Card -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-orange-500">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium text-neutral-800 mb-3">Call Us</h3>
+                    <p class="text-orange-500 font-medium mb-2">+233 123 456 789</p>
+                    <p class="text-neutral-500 text-sm">Mon-Fri 9AM-6PM</p>
+                </div>
+            </div>
+
+            <!-- Visit Us Card -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-orange-500">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium text-neutral-800 mb-3">Visit Us</h3>
+                    <p class="text-orange-500 font-medium mb-2">Accra, Ghana</p>
+                    <p class="text-neutral-500 text-sm">Come taste our jollof</p>
+                </div>
+            </div>
+
+            <!-- Response Time Card -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-orange-500">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12,6 12,12 16,14"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-medium text-neutral-800 mb-3">Response Time</h3>
+                    <p class="text-orange-500 font-medium mb-2">&lt; 1 Hour</p>
+                    <p class="text-neutral-500 text-sm">We reply quickly</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-neutral-900 text-white rounded-t-3xl" data-reveal="">
+  <div class="max-w-8xl mx-auto px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div>
+        <div class="mb-6">
+          <div id="footer-truck-container"></div>
+        </div>
+        <h3 class="text-2xl font-serif font-medium mb-6">FoodTruck</h3>
+        <p class="text-neutral-400 leading-relaxed mb-6">Authentic street food made with fresh ingredients and bold flavors. Quality that satisfies your hunger.</p>
+        <div class="flex items-center gap-4">
+          <button class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="instagram" class="lucide lucide-instagram w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+          </button>
+          <button class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="twitter" class="lucide lucide-twitter w-5 h-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+          </button>
+          <button class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="facebook" class="lucide lucide-facebook w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </button>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-medium mb-4">Menu</h4>
+        <div class="space-y-2 text-neutral-400">
+          <a href="#" class="block hover:text-white transition-colors">Breakfast</a>
+          <a href="#" class="block hover:text-white transition-colors">Lunch</a>
+          <a href="#" class="block hover:text-white transition-colors">Supper</a>
+          <a href="#" class="block hover:text-white transition-colors">Daily Specials</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-medium mb-4">Support</h4>
+        <div class="space-y-2 text-neutral-400">
+          <a href="#" class="block hover:text-white transition-colors">Track Order</a>
+          <a href="#" class="block hover:text-white transition-colors">Allergen Info</a>
+          <a href="contact.html" class="block hover:text-white transition-colors">Contact Us</a>
+          <a href="#" class="block hover:text-white transition-colors">FAQ</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-medium mb-4">Company</h4>
+        <div class="space-y-2 text-neutral-400">
+          <a href="#" class="block hover:text-white transition-colors">About Us</a>
+          <a href="#" class="block hover:text-white transition-colors">Locations</a>
+          <a href="#" class="block hover:text-white transition-colors">Catering</a>
+          <a href="#" class="block hover:text-white transition-colors">Partnerships</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-neutral-800 pt-8 flex flex-col md:flex-row items-center justify-between">
+      <p class="text-neutral-400 text-sm">© 2024 FoodTruck. All rights reserved.</p>
+      <div class="flex items-center gap-8 text-sm text-neutral-400 mt-4 md:mt-0">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-white transition-colors">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="navbar.js"></script>
+<script src="foodtruck-navbar.js"></script>
+<script src="truck-loader.js"></script>
+<script>
+// Initialize navbar component
+document.addEventListener('DOMContentLoaded', function() {
+    // Debug: Check if Navbar is defined
+    if (typeof Navbar === 'undefined') {
+        console.error('Navbar is not defined. Please check if navbar.js is loaded correctly.');
+    } else {
+        // Navbar is now provided by <foodtruck-navbar> custom element
+        const navElem = document.querySelector('foodtruck-navbar');
+        var navbar = navElem ? navElem.navbar : null;
+    }
+
+    // Cursor follower
+    var cursor = document.getElementById('cursor');
+    if (!cursor) {
+        console.warn('Cursor element not found!');
+    } else {
+        document.addEventListener('mousemove', function(e) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hide cursor on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+        }
+    }
+
+    // Reveal animations
+    var observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    var observer;
+    try {
+        observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0px)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-reveal]').forEach(function(el) {
+            observer.observe(el);
+        });
+    } catch (e) {
+        console.error('IntersectionObserver error:', e);
+    }
+
+    // Debug: Add click handlers to contact buttons
+    var emailBtn = document.getElementById('emailBtn');
+    var callBtn = document.getElementById('callBtn');
+    if (emailBtn) {
+        emailBtn.addEventListener('click', function() {
+            console.log('Email Us button clicked');
+            window.location.href = 'mailto:support@didijollof.store';
+        });
+    } else {
+        console.warn('Email button not found!');
+    }
+    if (callBtn) {
+        callBtn.addEventListener('click', function() {
+            console.log('Call Us button clicked');
+            window.location.href = 'tel:+233123456789';
+        });
+    } else {
+        console.warn('Call button not found!');
+    }
+
+    createTruckLoader({
+      containerId: 'footer-truck-container',
+      truckColor: '#FF6B35',
+      windowColor: '#FFD93D',
+      showLampPost: false,
+      size: 'small'
+    });
+});
+</script>
+
+</body>
+</html>
