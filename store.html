@@ -66,7 +66,7 @@
   </section>
   
   <!-- FILTER BAR -->
-  <section class="sticky top-[96px] z-50 bg-neutral-50/90 backdrop-blur-xl border-y border-neutral-200/50">
+  <section id="filter-bar" class="sticky top-0 z-50 bg-neutral-50/90 backdrop-blur-xl border-y border-neutral-200/50 transition-transform duration-300 ease-in-out">
     <div class="max-w-8xl mr-auto ml-auto pt-6 pr-8 pb-6 pl-8">
       <div class="flex items-center justify-between flex-wrap gap-4">
         <div class="flex items-center gap-6">
@@ -383,7 +383,27 @@
        
        revealElements.forEach(el => observer.observe(el));
        
-       // Smooth scrolling for anchor links
+       // --- Dynamic filter-bar offset based on Navbar visibility ---
+      const filterBar = document.getElementById('filter-bar');
+      const navbarHeader = navbar ? navbar.headerElement : null;
+      const navHeight = navbarHeader ? navbarHeader.offsetHeight : 96;
+
+      function updateFilterBarPosition() {
+        if (!filterBar || !navbarHeader) return;
+        const navHidden = navbarHeader.style.transform === 'translateY(-100%)';
+        if (navHidden) {
+          filterBar.style.transform = 'translateY(0)';
+        } else {
+          filterBar.style.transform = `translateY(${navHeight}px)`;
+        }
+      }
+
+      // initial position and on scroll/resize
+      updateFilterBarPosition();
+      window.addEventListener('scroll', updateFilterBarPosition);
+      window.addEventListener('resize', updateFilterBarPosition);
+
+      // Smooth scrolling for anchor links
        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
          anchor.addEventListener('click', function (e) {
            e.preventDefault();
