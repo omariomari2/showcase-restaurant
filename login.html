@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Global styles including truck component -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="images/truck.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
     tailwind.config = {
@@ -42,9 +45,8 @@
   <div class="w-full max-w-md">
     <!-- Logo/Brand Section -->
     <div class="text-center mb-8">
-      <div class="mx-auto w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 shadow-lg">
-        <i class="fas fa-utensils text-3xl text-accent"></i>
-      </div>
+      <!-- Truck brand logo -->
+      <div id="login-truck-container" class="mx-auto mb-4 flex items-center justify-center"></div>
       <h1 id="login-title" class="text-3xl font-serif font-bold text-white mb-2">FoodTruck Admin</h1>
       <p id="login-subtitle" class="text-white/80">Sign in to access the admin panel</p>
     </div>
@@ -211,6 +213,9 @@
     </div>
   </div>
 
+  <!-- Truck loader component script -->
+  <script src="truck-loader.js"></script>
+
   <script>
     // Demo credentials
     const ADMIN_CREDENTIALS = {
@@ -253,6 +258,17 @@
       }
       // Set initial tab state
       updateTabState();
+
+      // Render truck brand logo
+      if (window.createTruckLoader) {
+        createTruckLoader({
+          containerId: 'login-truck-container',
+          truckColor: '#FF6B35',
+          windowColor: '#FFD93D',
+          size: 'small',
+          showLampPost: false
+        });
+      }
     });
 
     // Tab switching logic
