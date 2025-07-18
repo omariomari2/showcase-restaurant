@@ -359,7 +359,7 @@
               <div class="cart-item" data-id="${item.id}">
                 <div class="cart-item-details">
                   <div class="cart-item-name">${itemName}</div>
-                  <div class="cart-item-price">$${totalPrice}</div>
+                  <div class="cart-item-price">₵${totalPrice}</div>
                 </div>
                 <div class="cart-item-controls">
                   <div class="cart-item-quantity">
@@ -381,7 +381,7 @@
         <div class="cart-footer-section">
           <div class="cart-total">
             <span>Total:</span>
-            <span class="cart-total-amount">$${total.toFixed(2)}</span>
+            <span class="cart-total-amount">₵${total.toFixed(2)}</span>
           </div>
           <button class="cart-checkout-btn" onclick="proceedToCheckout()">
             Proceed to Checkout
@@ -407,7 +407,7 @@
     function proceedToCheckout() {
       if (cartManager && cartManager.getCart().length > 0) {
         const total = cartManager.getCartTotal();
-        alert(`Proceeding to checkout with total: $${total.toFixed(2)}`);
+        alert(`Proceeding to checkout with total: ₵${total.toFixed(2)}`);
         // Here you would redirect to checkout page
         // window.location.href = '/checkout.html';
       } else {

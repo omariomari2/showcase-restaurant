@@ -302,7 +302,7 @@ function createAdminMenuItemElement(item) {
       <p class="menu-item-description">${item.description || 'No description available'}</p>
       <div class="menu-item-meta">
         <span class="category-badge">${item.category || 'Uncategorized'}</span>
-        <span class="price">$${price}</span>
+        <span class="price">₵${price}</span>
         <span class="status ${item.available ? 'available' : 'unavailable'}">
           ${item.available ? 'Available' : 'Unavailable'}
         </span>
@@ -504,7 +504,7 @@ function displayOrders(orders) {
       <div class="order-details">
         <p><strong>Customer:</strong> ${order.customer}</p>
         <p><strong>Items:</strong> ${order.items.join(', ')}</p>
-        <p><strong>Total:</strong> $${order.total.toFixed(2)}</p>
+        <p><strong>Total:</strong> ₵${order.total.toFixed(2)}</p>
         <p><strong>Time:</strong> ${formatDateTime(order.time)}</p>
       </div>
       <div class="order-actions">

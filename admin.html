@@ -143,7 +143,7 @@
           </div>
           <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-8 flex flex-col items-start">
             <div class="text-2xl lg:text-3xl mb-2 lg:mb-3 text-accent"><i class="fa fa-money-bill-wave"></i></div>
-            <div class="text-2xl lg:text-4xl font-bold font-serif mb-1" id="summary-revenue">$0</div>
+            <div class="text-2xl lg:text-4xl font-bold font-serif mb-1" id="summary-revenue">₵0</div>
             <div class="text-neutral-600 font-medium text-sm lg:text-base">Today's Revenue</div>
             <div class="text-green-500 text-xs lg:text-sm mt-1 lg:mt-2" id="revenue-delta">+0% from yesterday</div>
           </div>
@@ -402,7 +402,7 @@
       document.getElementById('summary-active-orders').textContent = activeOrders.length;
       document.getElementById('active-orders-delta').textContent = `+${activeOrders.length} from last hour`;
       const revenue = getTodayRevenue();
-      document.getElementById('summary-revenue').textContent = `$${revenue.toLocaleString()}`;
+      document.getElementById('summary-revenue').textContent = `₵${revenue.toLocaleString()}`;
       document.getElementById('revenue-delta').textContent = `+15% from yesterday`;
       document.getElementById('summary-rating').textContent = 4.8;
       const popular = getPopularItems();
@@ -434,7 +434,7 @@
         options: {
           plugins: { legend: { display: false } },
           scales: {
-            y: { beginAtZero: true, ticks: { callback: v => '$' + v } }
+            y: { beginAtZero: true, ticks: { callback: v => '₵' + v } }
           }
         }
       });
@@ -455,7 +455,7 @@
         html += `<tr>
           <td><img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded shadow"></td>
           <td>${product.name}</td>
-          <td>$${product.price.toFixed(2)}</td>
+          <td>₵${product.price.toFixed(2)}</td>
           <td>${product.category}</td>
           <td>
             <button class="edit-prod-btn text-blue-600 mr-2" data-pid="${product.id}" title="Edit"><span>✏️</span></button>
@@ -547,7 +547,7 @@
         if (order.status === 'cancelled') badgeClass = 'bg-red-200 text-red-800';
         html += `<tr>
           <td>${order.user}</td>
-          <td>$${order.total.toFixed(2)}</td>
+          <td>₵${order.total.toFixed(2)}</td>
           <td><span class="px-2 py-1 rounded text-xs font-semibold ${badgeClass}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span></td>
           <td>${new Date(order.timestamp).toLocaleString()}</td>
           <td><button class="expand-order-btn text-emerald-600 underline" data-oid="${order.id}">Expand</button></td>

@@ -150,7 +150,7 @@ function createMenuItemElement(item) {
       <h3>${item.name || 'Unnamed Item'}</h3>
       <p class="menu-item-description">${item.description || 'No description available'}</p>
       <div class="menu-item-footer">
-        <span class="menu-item-price">$${price}</span>
+        <span class="menu-item-price">₵${price}</span>
         <button class="add-to-cart-btn" onclick="addToCart(${item.id})" ${!item.available ? 'disabled' : ''}>
           ${item.available ? 'Add to Cart' : 'Not Available'}
         </button>
@@ -222,7 +222,7 @@ function updateCartDisplay() {
   
   if (cart.length === 0) {
     cartItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
-    cartTotal.textContent = '$0.00';
+    cartTotal.textContent = '₵0.00';
     return;
   }
   
@@ -242,7 +242,7 @@ function updateCartDisplay() {
       </div>
       <div class="cart-item-details">
         <h4>${item.name || 'Unnamed Item'}</h4>
-        <p>$${formattedPrice}</p>
+        <p>₵${formattedPrice}</p>
         <div class="quantity-controls">
           <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
           <span>${item.quantity}</span>
@@ -256,7 +256,7 @@ function updateCartDisplay() {
     total += itemPrice * item.quantity;
   });
   
-  cartTotal.textContent = `$${total.toFixed(2)}`;
+  cartTotal.textContent = `₵${total.toFixed(2)}`;
   
   // Update cart badge
   const cartBadge = document.querySelector('.cart-badge');

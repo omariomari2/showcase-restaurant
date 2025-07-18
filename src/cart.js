@@ -73,7 +73,7 @@ class CartManager {
           <div class="cart-footer">
             <div class="cart-total">
               <span>Total:</span>
-              <span class="cart-total-amount" id="cart-total-amount">$0.00</span>
+              <span class="cart-total-amount" id="cart-total-amount">₵0.00</span>
             </div>
             <button class="cart-checkout-btn" id="cart-checkout-btn">
               Checkout
@@ -252,7 +252,7 @@ class CartManager {
         <div class="cart-item" data-id="${item.id}">
           <div class="cart-item-details">
             <div class="cart-item-name">${itemName}</div>
-            <div class="cart-item-price">$${totalPrice}</div>
+            <div class="cart-item-price">₵${totalPrice}</div>
           </div>
           <div class="cart-item-controls">
             <div class="cart-item-quantity">
@@ -280,7 +280,7 @@ class CartManager {
         const quantity = parseInt(item.quantity) || 1;
         return sum + (price * quantity);
       }, 0);
-      cartTotal.textContent = `$${total.toFixed(2)}`;
+      cartTotal.textContent = `₵${total.toFixed(2)}`;
     }
   }
 
@@ -303,7 +303,7 @@ class CartManager {
     // Here you would typically redirect to a checkout page
     // For now, we'll show a simple alert
     const total = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    alert(`Proceeding to checkout with total: $${total.toFixed(2)}`);
+    alert(`Proceeding to checkout with total: ₵${total.toFixed(2)}`);
     
     // You can redirect to a checkout page here
     // window.location.href = '/checkout.html';
