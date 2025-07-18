@@ -123,7 +123,7 @@ class Navbar {
 
     // Welcome section
     const welcomeSection = document.createElement("div");
-    welcomeSection.className = "bg-orange-50 px-6 py-8 flex items-center justify-between";
+    welcomeSection.className = "bg-orange-50 px-6 py-8 flex items-center";
     welcomeSection.innerHTML = `
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
@@ -134,12 +134,9 @@ class Navbar {
         </div>
         <div>
           <h3 class="font-semibold text-gray-900">Welcome, Guest!</h3>
-          <p class="text-sm text-gray-600">Sign in for better experience</p>
+          <p class="text-sm text-gray-600">Browse our delicious menu</p>
         </div>
       </div>
-      <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium">
-        Sign In
-      </button>
     `;
 
     // Navigation section
