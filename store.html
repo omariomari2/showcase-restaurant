@@ -66,50 +66,52 @@
   </section>
   
   <!-- FILTER BAR -->
-  <section class="bg-neutral-50/90 backdrop-blur-xl border-y border-neutral-200/50" data-reveal="">
+  <section class="sticky top-[96px] z-50 bg-neutral-50/90 backdrop-blur-xl border-y border-neutral-200/50">
     <div class="max-w-8xl mr-auto ml-auto pt-6 pr-8 pb-6 pl-8">
       <div class="flex items-center justify-between flex-wrap gap-4">
         <div class="flex items-center gap-6">
           <h2 class="text-lg font-serif font-medium">Filter &amp; Discover</h2>
-          <span class="text-sm opacity-60">28 menu items</span>
+          <span id="total-items-count" class="text-sm opacity-60">28 menu items</span>
         </div>
         <div class="flex items-center gap-3 flex-wrap">
           <div class="relative">
             <button data-dropdown-toggle="cat-dd" class="group flex items-center gap-2 px-5 py-3 bg-white border border-neutral-200 rounded-full text-sm font-medium hover:border-neutral-300 hover:shadow-md transition-all duration-300">
-              <span>Category</span>
+              <span id="category-filter-label">Category</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-300 group-hover:rotate-180"><path d="m6 9 6 6 6-6"></path></svg>
             </button>
-            <div id="cat-dd" class="hidden absolute z-[9999] mt-2 w-48 bg-white rounded-2xl shadow-xl border border-neutral-200 p-2">
-              <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">Breakfast</a>
-              <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">Lunch</a>
-              <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">Supper</a>
+            <div id="cat-dd" class="hidden absolute z-[9999] mt-2 w-48 bg-white rounded-2xl shadow-xl border border-neutral-200 p-2 dropdown-menu">
+              <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="category" data-filter-value="all">All Categories</a>
+              <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="category" data-filter-value="Breakfast">Breakfast</a>
+              <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="category" data-filter-value="Lunch">Lunch</a>
+              <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="category" data-filter-value="Dinner">Dinner</a>
+              <a href="#" class="block px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="category" data-filter-value="Complements">Complements</a>
             </div>
           </div>
           <div class="relative">
             <button data-dropdown-toggle="col-dd" class="group flex items-center gap-2 px-5 py-3 bg-orange-50 border border-orange-200 rounded-full text-sm font-medium hover:bg-orange-100 transition-all duration-300">
-              <span class="flex items-center gap-2">
-                <span class="w-3 h-3 bg-orange-500 rounded-full"></span>
-                Spicy
+              <span id="collection-filter-label" class="flex items-center gap-2">
+                All Items
               </span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" class="lucide lucide-chevron-down w-4 h-4 transition-transform duration-300 group-hover:rotate-180"><path d="m6 9 6 6 6-6"></path></svg>
             </button>
-            <div id="col-dd" class="hidden absolute z-[9999] mt-2 w-44 bg-white rounded-2xl shadow-xl border border-neutral-200 p-2">
-              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">
+            <div id="col-dd" class="hidden absolute z-[9999] mt-2 w-44 bg-white rounded-2xl shadow-xl border border-neutral-200 p-2 dropdown-menu">
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="collection" data-filter-value="all">All Items</a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="collection" data-filter-value="Spicy">
                 <span class="w-3 h-3 bg-orange-500 rounded-full"></span>
-                Spicy Level
+                Spicy
               </a>
-              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="collection" data-filter-value="Vegetarian">
                 <span class="w-3 h-3 bg-green-500 rounded-full"></span>
                 Vegetarian
               </a>
-              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors">
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-neutral-100 text-sm transition-colors" data-filter-type="collection" data-filter-value="Gluten Free">
                 <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
                 Gluten Free
               </a>
             </div>
           </div>
           <div class="relative">
-            <input type="text" placeholder="Search menu items..." class="w-64 border border-neutral-200 rounded-full py-3 pl-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-300 transition-all duration-300">
+            <input id="search-input" type="text" placeholder="Search menu items..." class="w-64 border border-neutral-200 rounded-full py-3 pl-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-300 transition-all duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" class="lucide lucide-search w-4 h-4 absolute right-4 top-3.5 text-neutral-400"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
           </div>
         </div>
@@ -131,7 +133,7 @@
           <div class="space-y-4 mb-8">
             <div class="flex items-center justify-between text-sm">
               <span class="text-neutral-500">Available items</span>
-              <span class="font-medium">4</span>
+              <span id="breakfast-count" class="font-medium">4</span>
             </div>
             <div class="flex items-center justify-between text-sm">
               <span class="text-neutral-500">Price range</span>
@@ -163,7 +165,7 @@
           <div class="space-y-4 mb-8">
             <div class="flex items-center justify-between text-sm">
               <span class="text-neutral-500">Available items</span>
-              <span class="font-medium">8</span>
+              <span id="lunch-count" class="font-medium">8</span>
             </div>
             <div class="flex items-center justify-between text-sm">
               <span class="text-neutral-500">Price range</span>
@@ -195,7 +197,7 @@
           <div class="space-y-4 mb-8">
             <div class="flex items-center justify-between text-sm">
               <span class="text-neutral-500">Available items</span>
-              <span class="font-medium">8</span>
+              <span id="dinner-count" class="font-medium">8</span>
             </div>
             <div class="flex items-center justify-between text-sm">
               <span class="text-neutral-500">Price range</span>
@@ -227,7 +229,7 @@
           <div class="space-y-4 mb-8">
             <div class="flex items-center justify-between text-sm">
               <span class="text-neutral-500">Available items</span>
-              <span class="font-medium">8</span>
+              <span id="complements-count" class="font-medium">8</span>
             </div>
             <div class="flex items-center justify-between text-sm">
               <span class="text-neutral-500">Price range</span>
@@ -470,6 +472,134 @@
     }
     
     document.addEventListener('DOMContentLoaded', renderAllProducts);
+    
+    // --- Filtering and Search Logic ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('search-input');
+      const filterLinks = document.querySelectorAll('[data-filter-type]');
+      const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
+
+      let filters = {
+        category: 'all',
+        collection: 'all',
+        searchTerm: ''
+      };
+
+      // Handle search input
+      searchInput.addEventListener('input', (e) => {
+        filters.searchTerm = e.target.value.toLowerCase();
+        applyFilters();
+      });
+
+      // Handle filter clicks
+      filterLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const type = link.dataset.filterType;
+          const value = link.dataset.filterValue;
+          filters[type] = value;
+
+          // Update UI
+          if (type === 'category') {
+            document.getElementById('category-filter-label').textContent = value === 'all' ? 'Category' : value;
+          } else {
+            const label = document.getElementById('collection-filter-label');
+            label.innerHTML = link.innerHTML;
+          }
+          
+          // Close dropdown
+          const dropdownId = link.closest('.dropdown-menu').id;
+          document.getElementById(dropdownId).classList.add('hidden');
+          
+          applyFilters();
+        });
+      });
+      
+      // Dropdown toggle
+      dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const dropdownId = toggle.getAttribute('data-dropdown-toggle');
+            document.getElementById(dropdownId).classList.toggle('hidden');
+        });
+      });
+      
+      document.addEventListener('click', () => {
+          document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.add('hidden'));
+      });
+      
+      function applyFilters() {
+        const products = getProducts();
+        let filteredProducts = products;
+
+        // Category filter
+        if (filters.category !== 'all') {
+          filteredProducts = filteredProducts.filter(p => p.category === filters.category);
+        }
+        
+        // Collection filter
+        if (filters.collection !== 'all') {
+          filteredProducts = filteredProducts.filter(p => p.collections && p.collections.includes(filters.collection));
+        }
+        
+        // Search term filter
+        if (filters.searchTerm) {
+          filteredProducts = filteredProducts.filter(p => p.name.toLowerCase().includes(filters.searchTerm));
+        }
+
+        renderFilteredProducts(filteredProducts);
+      }
+      
+      window.applyFilters = applyFilters;
+    });
+    
+    function renderFilteredProducts(filteredProducts) {
+      const categories = ['Breakfast', 'Lunch', 'Dinner', 'Complements'];
+      let totalVisibleItems = 0;
+
+      categories.forEach(category => {
+        const container = document.getElementById(`${category.toLowerCase()}-products`);
+        const section = document.getElementById(category.toLowerCase());
+        const countSpan = document.getElementById(`${category.toLowerCase()}-count`);
+        
+        const categoryProducts = filteredProducts.filter(p => p.category === category);
+        
+        let html = '';
+        if (categoryProducts.length > 0) {
+          categoryProducts.forEach(product => {
+            html += `<div class="group border rounded-2xl p-4 bg-neutral-50 flex flex-col">
+              <div class="relative overflow-hidden bg-neutral-100 rounded-3xl mb-4">
+                <div class="aspect-[3/4]">
+                  <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+              </div>
+              <div class="px-2 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 class="font-medium mb-2">${product.name}</h3>
+                  <span class="text-sm text-neutral-500 block mb-2">${product.category}</span>
+                  <span class="text-lg font-serif font-medium">$${product.price.toFixed(2)}</span>
+                </div>
+                <button class="add-to-cart-btn w-full bg-emerald-600 text-white py-2 mt-4 rounded-full font-medium hover:bg-emerald-700 transition" data-pid="${product.id}">Add to Cart</button>
+              </div>
+            </div>`;
+          });
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+        
+        container.innerHTML = html;
+        countSpan.textContent = categoryProducts.length;
+        totalVisibleItems += categoryProducts.length;
+      });
+
+      document.getElementById('total-items-count').textContent = `${totalVisibleItems} menu items`;
+    }
+    
+    function applyFilters() {
+      // Logic will be added here
+      console.log('Applying filters:', filters);
+    }
   </script>
   <script src="truck-loader.js"></script>
 </body>
