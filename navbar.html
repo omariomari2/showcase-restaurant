@@ -89,6 +89,29 @@
       };
     }
     
+    // Admin button authentication check
+    if (adminBtn) {
+      adminBtn.onclick = function(e) {
+        e.preventDefault();
+        try {
+          const auth = JSON.parse(localStorage.getItem('adminAuth') || '{}');
+          if (auth.authenticated) {
+            const expiryTime = new Date(auth.expiryTime);
+            if (new Date() <= expiryTime) {
+              window.location.href = 'admin.html';
+            } else {
+              localStorage.removeItem('adminAuth');
+              window.location.href = 'login.html';
+            }
+          } else {
+            window.location.href = 'login.html';
+          }
+        } catch {
+          window.location.href = 'login.html';
+        }
+      };
+    }
+    
     function updateCartBadge() {
       const count = Number(localStorage.getItem('cartCount') || 0);
       if (badge) {
