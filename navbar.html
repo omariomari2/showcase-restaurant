@@ -45,18 +45,49 @@
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </a>
+      <!-- Hamburger Menu Button -->
+      <button class="md:hidden flex flex-col items-center justify-center w-6 h-6 space-y-1" id="hamburger-btn">
+        <span class="block w-6 h-0.5 bg-black transition-all duration-300 ease-in-out hamburger-line-1"></span>
+        <span class="block w-6 h-0.5 bg-black transition-all duration-300 ease-in-out hamburger-line-2"></span>
+        <span class="block w-6 h-0.5 bg-black transition-all duration-300 ease-in-out hamburger-line-3"></span>
+      </button>
     </div>
   </nav>
+  
+  <!-- Mobile Menu Overlay -->
+  <div class="md:hidden fixed top-0 left-0 w-full h-full bg-neutral-50/95 backdrop-blur-xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50" id="mobile-menu">
+    <!-- Close Button -->
+    <button class="absolute top-8 right-8 w-8 h-8 flex items-center justify-center" id="mobile-menu-close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    
+    <!-- Mobile Menu Content -->
+    <div class="flex flex-col items-center justify-center h-full gap-8 text-lg font-medium">
+      <a href="#" class="text-neutral-800 hover:text-neutral-600 transition-colors duration-300 mobile-menu-item text-neutral-900 font-semibold">Home</a>
+      <a href="#" class="text-neutral-800 hover:text-neutral-600 transition-colors duration-300 mobile-menu-item">Store</a>
+      <a href="#" class="text-neutral-800 hover:text-neutral-600 transition-colors duration-300 mobile-menu-item">Contact Us</a>
+      <a href="#" class="text-neutral-800 hover:text-neutral-600 transition-colors duration-300 mobile-menu-item">Track Orders</a>
+    </div>
+  </div>
 </header>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var cartBtn = document.getElementById('cart');
     var badge = document.getElementById('cart-badge');
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
+    var mobileMenuClose = document.getElementById('mobile-menu-close');
+    var mobileMenuOpen = false;
+    
     if (cartBtn) {
       cartBtn.onclick = function() {
         window.location.href = 'cart.html';
       };
     }
+    
     function updateCartBadge() {
       const count = Number(localStorage.getItem('cartCount') || 0);
       if (badge) {
@@ -64,6 +95,62 @@
         badge.style.display = count > 0 ? 'flex' : 'none';
       }
     }
+    
+    function toggleMobileMenu() {
+      const hamburgerLines = document.querySelectorAll('.hamburger-line-1, .hamburger-line-2, .hamburger-line-3');
+      
+      if (mobileMenuOpen) {
+        mobileMenu.classList.add('-translate-x-full');
+        mobileMenu.classList.remove('translate-x-0');
+        hamburgerLines[0].style.transform = 'rotate(0deg) translateY(0px)';
+        hamburgerLines[1].style.opacity = '1';
+        hamburgerLines[2].style.transform = 'rotate(0deg) translateY(0px)';
+        document.body.classList.remove('mobile-menu-open');
+      } else {
+        mobileMenu.classList.remove('-translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
+        hamburgerLines[0].style.transform = 'rotate(45deg) translateY(7px)';
+        hamburgerLines[1].style.opacity = '0';
+        hamburgerLines[2].style.transform = 'rotate(-45deg) translateY(-7px)';
+        document.body.classList.add('mobile-menu-open');
+      }
+      mobileMenuOpen = !mobileMenuOpen;
+    }
+    
+    function closeMobileMenu() {
+      const hamburgerLines = document.querySelectorAll('.hamburger-line-1, .hamburger-line-2, .hamburger-line-3');
+      
+      mobileMenu.classList.add('-translate-x-full');
+      mobileMenu.classList.remove('translate-x-0');
+      hamburgerLines[0].style.transform = 'rotate(0deg) translateY(0px)';
+      hamburgerLines[1].style.opacity = '1';
+      hamburgerLines[2].style.transform = 'rotate(0deg) translateY(0px)';
+      document.body.classList.remove('mobile-menu-open');
+      mobileMenuOpen = false;
+    }
+    
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    }
+    
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener('click', closeMobileMenu);
+    }
+    
+    // Close mobile menu when clicking on menu items
+    document.querySelectorAll('.mobile-menu-item').forEach(item => {
+      item.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const isClickInside = hamburgerBtn.contains(event.target) || mobileMenu.contains(event.target);
+      
+      if (mobileMenuOpen && !isClickInside) {
+        closeMobileMenu();
+      }
+    });
+    
     updateCartBadge();
     window.addEventListener('cartUpdated', updateCartBadge);
     window.addEventListener('storage', function(e) {

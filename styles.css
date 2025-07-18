@@ -138,6 +138,64 @@
   width: 36px;
 }
 
+/* Hamburger Menu Styles */
+.hamburger-line-1,
+.hamburger-line-2,
+.hamburger-line-3 {
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+/* Ensure hamburger button stays above mobile menu */
+#hamburger-btn {
+  z-index: 10000 !important;
+  position: relative;
+}
+
+/* Mobile menu overlay animations */
+#mobile-menu {
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+
+#mobile-menu.translate-x-0 {
+  transform: translateX(0);
+}
+
+#mobile-menu.-translate-x-full {
+  transform: translateX(-100%);
+}
+
+/* Mobile menu item hover effects */
+.mobile-menu-item {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.mobile-menu-item:hover {
+  transform: translateY(-1px);
+}
+
+/* Mobile menu welcome section styling */
+.mobile-menu-welcome {
+  background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+}
+
+/* Mobile menu footer styling */
+.mobile-menu-footer {
+  background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+  overflow: hidden;
+}
+
 /* Carousel Styles */
 .carousel-slide {
   z-index: 1;
