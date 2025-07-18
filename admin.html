@@ -252,6 +252,58 @@
   <script src="products.js"></script>
   <script src="orders.js"></script>
   <script>
+    // Authentication check
+    function checkAuthentication() {
+      try {
+        const auth = JSON.parse(localStorage.getItem('adminAuth') || '{}');
+        if (!auth.authenticated) {
+          window.location.href = 'login.html';
+          return false;
+        }
+        
+        const expiryTime = new Date(auth.expiryTime);
+        if (new Date() > expiryTime) {
+          localStorage.removeItem('adminAuth');
+          window.location.href = 'login.html';
+          return false;
+        }
+        
+        return true;
+      } catch {
+        window.location.href = 'login.html';
+        return false;
+      }
+    }
+
+    // Check authentication on page load
+    if (!checkAuthentication()) {
+      // Redirect will happen in checkAuthentication function
+    } else {
+      // Show user info
+      const auth = JSON.parse(localStorage.getItem('adminAuth'));
+      console.log('Admin authenticated:', auth.username);
+    }
+
+    // Logout functionality
+    function logout() {
+      localStorage.removeItem('adminAuth');
+      window.location.href = 'login.html';
+    }
+
+    // Add logout event listener
+    document.addEventListener('DOMContentLoaded', () => {
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (confirm('Are you sure you want to logout?')) {
+            logout();
+          }
+        });
+      }
+    });
+  </script>
+  <script>
     // Mobile menu functionality
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileClose = document.getElementById('mobile-close');

@@ -239,16 +239,38 @@ class Navbar {
     mobileMenuDiv.appendChild(closeBtn);
     mobileMenuDiv.appendChild(mobileMenuContent);
 
-    // Replace search icon with check icon for admin
+    // Admin icon - check authentication
     if (this.options.showSearch) {
       const adminBtn = document.createElement("a");
       adminBtn.className = "relative group";
       adminBtn.id = "admin-btn";
-      adminBtn.href = "admin.html";
       adminBtn.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
-          <polyline points="20 6 9 17 4 12" />
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
         </svg>`;
+      
+      // Check if user is authenticated
+      adminBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        try {
+          const auth = JSON.parse(localStorage.getItem('adminAuth') || '{}');
+          if (auth.authenticated) {
+            const expiryTime = new Date(auth.expiryTime);
+            if (new Date() <= expiryTime) {
+              window.location.href = 'admin.html';
+            } else {
+              localStorage.removeItem('adminAuth');
+              window.location.href = 'login.html';
+            }
+          } else {
+            window.location.href = 'login.html';
+          }
+        } catch {
+          window.location.href = 'login.html';
+        }
+      });
+      
       iconsDiv.appendChild(adminBtn);
     }
 
