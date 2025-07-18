@@ -146,12 +146,6 @@
   transform-origin: center;
 }
 
-/* Ensure hamburger button stays above mobile menu */
-#hamburger-btn {
-  z-index: 10000 !important;
-  position: relative;
-}
-
 /* Mobile menu overlay animations */
 #mobile-menu {
   transition: transform 0.3s ease-in-out;
