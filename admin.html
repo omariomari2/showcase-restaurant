@@ -58,115 +58,193 @@
       display: inline-block;
       text-align: center;
     }
+    
+    /* Mobile sidebar styles */
+    .mobile-sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .mobile-sidebar.open {
+      transform: translateX(0);
+    }
+    
+    /* Responsive table styles */
+    .responsive-table {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-hidden { display: none !important; }
+      .mobile-full { width: 100% !important; }
+    }
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900 antialiased overflow-x-hidden">
+  <!-- Mobile Header -->
+  <header class="lg:hidden bg-white/80 backdrop-blur-xl border-b border-neutral-200/50 px-4 py-4 flex items-center justify-between">
+    <h1 class="text-xl font-serif font-medium">Admin Panel</h1>
+    <button id="mobile-menu-toggle" class="p-2 rounded-lg hover:bg-gray-100">
+      <i class="fa fa-bars text-xl"></i>
+    </button>
+  </header>
+
+  <!-- Mobile Overlay -->
+  <div id="mobile-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
   <div class="flex min-h-screen">
     <!-- Sidebar -->
-    <aside class="w-72 bg-white/80 backdrop-blur-xl border-r border-neutral-200/50 rounded-tr-3xl rounded-br-3xl shadow-soft flex flex-col py-10 px-8 mt-8 ml-4 mb-8">
-      <div class="mb-10">
-        <h2 class="text-3xl font-serif font-medium mb-1 tracking-tight">Admin Panel</h2>
-        <div class="text-sm opacity-80 mb-6">Welcome, Administrator</div>
-        <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full font-medium flex items-center gap-2 shadow-soft transition-all"><i class="fa fa-sign-out-alt"></i> Logout</button>
+    <aside id="sidebar" class="mobile-sidebar lg:translate-x-0 fixed lg:relative z-50 w-72 lg:w-72 bg-white/80 backdrop-blur-xl border-r border-neutral-200/50 lg:rounded-tr-3xl lg:rounded-br-3xl shadow-soft flex flex-col py-6 lg:py-10 px-4 lg:px-8 lg:mt-8 lg:ml-4 lg:mb-8 h-full lg:h-auto">
+      <!-- Mobile close button -->
+      <button id="mobile-close" class="lg:hidden self-end p-2 rounded-lg hover:bg-gray-100 mb-4">
+        <i class="fa fa-times text-xl"></i>
+      </button>
+      
+      <div class="mb-6 lg:mb-10">
+        <h2 class="text-2xl lg:text-3xl font-serif font-medium mb-1 tracking-tight">Admin Panel</h2>
+        <div class="text-sm opacity-80 mb-4 lg:mb-6">Welcome, Administrator</div>
+        <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-full font-medium flex items-center gap-2 shadow-soft transition-all text-sm lg:text-base">
+          <i class="fa fa-sign-out-alt"></i> Logout
+        </button>
       </div>
       <nav class="flex-1">
         <ul class="space-y-2" id="sidebar-nav">
-          <li><a href="#" data-tab="dashboard" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium sidebar-active transition-all"><span class="sidebar-icon"><i class="fa fa-home"></i></span>Dashboard</a></li>
-          <li><a href="#" data-tab="menu" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-utensils"></i></span>Menu Management</a></li>
-          <li><a href="#" data-tab="reservations" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-calendar-alt"></i></span>Reservations</a></li>
-          <li><a href="#" data-tab="orders" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-shopping-cart"></i></span>Orders</a></li>
-          <li><a href="#" data-tab="analytics" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-chart-line"></i></span>Analytics</a></li>
-          <li><a href="#" data-tab="settings" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all"><span class="sidebar-icon"><i class="fa fa-cog"></i></span>Settings</a></li>
+          <li><a href="#" data-tab="dashboard" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium sidebar-active transition-all text-sm lg:text-base"><span class="sidebar-icon"><i class="fa fa-home"></i></span>Dashboard</a></li>
+          <li><a href="#" data-tab="menu" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all text-sm lg:text-base"><span class="sidebar-icon"><i class="fa fa-utensils"></i></span>Menu Management</a></li>
+          <li><a href="#" data-tab="reservations" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all text-sm lg:text-base"><span class="sidebar-icon"><i class="fa fa-calendar-alt"></i></span>Reservations</a></li>
+          <li><a href="#" data-tab="orders" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all text-sm lg:text-base"><span class="sidebar-icon"><i class="fa fa-shopping-cart"></i></span>Orders</a></li>
+          <li><a href="#" data-tab="analytics" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all text-sm lg:text-base"><span class="sidebar-icon"><i class="fa fa-chart-line"></i></span>Analytics</a></li>
+          <li><a href="#" data-tab="settings" class="flex items-center gap-3 py-3 px-4 rounded-full font-medium transition-all text-sm lg:text-base"><span class="sidebar-icon"><i class="fa fa-cog"></i></span>Settings</a></li>
       </ul>
       </nav>
     </aside>
+    
     <!-- Main Content -->
-    <main class="flex-1 p-10 md:p-16">
+    <main class="flex-1 p-4 lg:p-10 xl:p-16 pt-0 lg:pt-10 xl:pt-16">
       <!-- Dashboard Tab -->
       <section id="tab-dashboard" class="admin-tab-section">
-        <h1 class="text-5xl font-serif font-medium mb-2 tracking-tight">Dashboard</h1>
-        <div class="text-neutral-500 mb-10 text-lg">Overview of restaurant operations</div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col items-start">
-            <div class="text-3xl mb-3 text-accent"><i class="fa fa-calendar-alt"></i></div>
-            <div class="text-4xl font-bold font-serif mb-1" id="summary-reservations">12</div>
-            <div class="text-neutral-600 font-medium">Today's Reservations</div>
-            <div class="text-green-500 text-sm mt-2">+3 from yesterday</div>
+        <h1 class="text-3xl lg:text-5xl font-serif font-medium mb-2 tracking-tight">Dashboard</h1>
+        <div class="text-neutral-500 mb-6 lg:mb-10 text-base lg:text-lg">Overview of restaurant operations</div>
+        
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mb-8 lg:mb-12">
+          <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-8 flex flex-col items-start">
+            <div class="text-2xl lg:text-3xl mb-2 lg:mb-3 text-accent"><i class="fa fa-calendar-alt"></i></div>
+            <div class="text-2xl lg:text-4xl font-bold font-serif mb-1" id="summary-reservations">12</div>
+            <div class="text-neutral-600 font-medium text-sm lg:text-base">Today's Reservations</div>
+            <div class="text-green-500 text-xs lg:text-sm mt-1 lg:mt-2">+3 from yesterday</div>
           </div>
-          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col items-start">
-            <div class="text-3xl mb-3 text-accent"><i class="fa fa-utensils"></i></div>
-            <div class="text-4xl font-bold font-serif mb-1" id="summary-active-orders">0</div>
-            <div class="text-neutral-600 font-medium">Active Orders</div>
-            <div class="text-green-500 text-sm mt-2" id="active-orders-delta">+0 from last hour</div>
+          <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-8 flex flex-col items-start">
+            <div class="text-2xl lg:text-3xl mb-2 lg:mb-3 text-accent"><i class="fa fa-utensils"></i></div>
+            <div class="text-2xl lg:text-4xl font-bold font-serif mb-1" id="summary-active-orders">0</div>
+            <div class="text-neutral-600 font-medium text-sm lg:text-base">Active Orders</div>
+            <div class="text-green-500 text-xs lg:text-sm mt-1 lg:mt-2" id="active-orders-delta">+0 from last hour</div>
           </div>
-          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col items-start">
-            <div class="text-3xl mb-3 text-accent"><i class="fa fa-money-bill-wave"></i></div>
-            <div class="text-4xl font-bold font-serif mb-1" id="summary-revenue">$0</div>
-            <div class="text-neutral-600 font-medium">Today's Revenue</div>
-            <div class="text-green-500 text-sm mt-2" id="revenue-delta">+0% from yesterday</div>
+          <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-8 flex flex-col items-start">
+            <div class="text-2xl lg:text-3xl mb-2 lg:mb-3 text-accent"><i class="fa fa-money-bill-wave"></i></div>
+            <div class="text-2xl lg:text-4xl font-bold font-serif mb-1" id="summary-revenue">$0</div>
+            <div class="text-neutral-600 font-medium text-sm lg:text-base">Today's Revenue</div>
+            <div class="text-green-500 text-xs lg:text-sm mt-1 lg:mt-2" id="revenue-delta">+0% from yesterday</div>
           </div>
-          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col items-start">
-            <div class="text-3xl mb-3 text-accent"><i class="fa fa-star"></i></div>
-            <div class="text-4xl font-bold font-serif mb-1" id="summary-rating">4.8</div>
-            <div class="text-neutral-600 font-medium">Average Rating</div>
-            <div class="text-neutral-500 text-sm mt-2">No change</div>
+          <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-8 flex flex-col items-start">
+            <div class="text-2xl lg:text-3xl mb-2 lg:mb-3 text-accent"><i class="fa fa-star"></i></div>
+            <div class="text-2xl lg:text-4xl font-bold font-serif mb-1" id="summary-rating">4.8</div>
+            <div class="text-neutral-600 font-medium text-sm lg:text-base">Average Rating</div>
+            <div class="text-neutral-500 text-xs lg:text-sm mt-1 lg:mt-2">No change</div>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white rounded-3xl shadow-soft p-8 col-span-2 flex flex-col">
-            <div class="font-semibold mb-4 text-lg">Weekly Revenue</div>
-            <canvas id="weeklyRevenueChart" height="120"></canvas>
+        
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 lg:gap-8">
+          <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-8 xl:col-span-2 flex flex-col">
+            <div class="font-semibold mb-4 text-base lg:text-lg">Weekly Revenue</div>
+            <div class="h-48 lg:h-auto">
+              <canvas id="weeklyRevenueChart" height="120"></canvas>
+            </div>
           </div>
-          <div class="bg-white rounded-3xl shadow-soft p-8 flex flex-col">
-            <div class="font-semibold mb-4 text-lg">Popular Items</div>
+          <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-8 flex flex-col">
+            <div class="font-semibold mb-4 text-base lg:text-lg">Popular Items</div>
             <div id="popular-items-list"></div>
           </div>
         </div>
       </section>
       <!-- Menu Management Tab -->
       <section id="tab-menu" class="admin-tab-section hidden">
-        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Menu Management</h2>
-        <form id="add-product-form" class="mb-8 flex flex-wrap gap-4 items-end">
-          <input type="text" id="prod-name" placeholder="Name" required class="border border-neutral-200 rounded-full px-5 py-3">
-          <input type="number" id="prod-price" placeholder="Price" step="0.01" required class="border border-neutral-200 rounded-full px-5 py-3">
-          <input type="text" id="prod-category" placeholder="Category" required class="border border-neutral-200 rounded-full px-5 py-3">
-          <input type="file" id="prod-image-file" accept="image/*" class="border border-neutral-200 rounded-full px-5 py-3 bg-white">
-          <input type="hidden" id="prod-image">
-          <img id="prod-image-preview" src="" alt="Preview" class="w-16 h-16 object-cover rounded-xl border border-neutral-200 ml-2 hidden">
-          <button type="submit" class="bg-accent text-white px-6 py-3 rounded-full font-medium shadow-soft hover:bg-orange-600 transition">Add Product</button>
-        </form>
-        <input type="text" id="product-search" placeholder="Search products..." class="mb-6 border border-neutral-200 rounded-full px-5 py-3 w-full max-w-xs">
-        <div id="product-list-admin" class="overflow-x-auto"></div>
+        <h2 class="text-2xl lg:text-4xl font-serif font-medium mb-4 lg:mb-6 tracking-tight">Menu Management</h2>
+        
+        <!-- Add Product Form -->
+        <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-6 mb-6 lg:mb-8">
+          <h3 class="font-semibold mb-4 text-base lg:text-lg">Add New Product</h3>
+          <form id="add-product-form" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <input type="text" id="prod-name" placeholder="Name" required class="border border-neutral-200 rounded-xl px-4 py-3 text-sm lg:text-base">
+              <input type="number" id="prod-price" placeholder="Price" step="0.01" required class="border border-neutral-200 rounded-xl px-4 py-3 text-sm lg:text-base">
+              <input type="text" id="prod-category" placeholder="Category" required class="border border-neutral-200 rounded-xl px-4 py-3 text-sm lg:text-base">
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 items-start">
+              <input type="file" id="prod-image-file" accept="image/*" class="border border-neutral-200 rounded-xl px-4 py-3 bg-white text-sm lg:text-base flex-1">
+              <input type="hidden" id="prod-image">
+              <img id="prod-image-preview" src="" alt="Preview" class="w-16 h-16 object-cover rounded-xl border border-neutral-200 hidden">
+            </div>
+            <button type="submit" class="w-full sm:w-auto bg-accent text-white px-6 py-3 rounded-xl font-medium shadow-soft hover:bg-orange-600 transition text-sm lg:text-base">Add Product</button>
+          </form>
+        </div>
+        
+        <!-- Search and Products -->
+        <div class="mb-4">
+          <input type="text" id="product-search" placeholder="Search products..." class="border border-neutral-200 rounded-xl px-4 py-3 w-full max-w-sm text-sm lg:text-base">
+        </div>
+        <div class="responsive-table">
+          <div id="product-list-admin" class="overflow-x-auto"></div>
+        </div>
       </section>
       <!-- Orders Tab -->
       <section id="tab-orders" class="admin-tab-section hidden">
-        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Orders</h2>
-        <div class="mb-6 flex gap-4 items-center">
-          <label class="font-medium">Status:</label>
-          <select id="order-filter" class="border border-neutral-200 rounded-full px-4 py-2">
-            <option value="all">All</option>
-            <option value="pending">Pending</option>
-            <option value="fulfilled">Fulfilled</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
-          <button id="mark-all-fulfilled" class="bg-primary text-white px-5 py-2 rounded-full font-medium shadow-soft hover:bg-emerald-700 transition">Mark All as Fulfilled</button>
+        <h2 class="text-2xl lg:text-4xl font-serif font-medium mb-4 lg:mb-6 tracking-tight">Orders</h2>
+        
+        <!-- Order Controls -->
+        <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-4 lg:p-6 mb-6">
+          <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+            <div class="flex items-center gap-2">
+              <label class="font-medium text-sm lg:text-base">Status:</label>
+              <select id="order-filter" class="border border-neutral-200 rounded-xl px-4 py-2 text-sm lg:text-base">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="fulfilled">Fulfilled</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <button id="mark-all-fulfilled" class="w-full sm:w-auto bg-primary text-white px-5 py-2 rounded-xl font-medium shadow-soft hover:bg-emerald-700 transition text-sm lg:text-base">Mark All as Fulfilled</button>
+          </div>
         </div>
-        <div id="order-list-admin" class="overflow-x-auto"></div>
+        
+        <!-- Orders List -->
+        <div class="responsive-table">
+          <div id="order-list-admin" class="overflow-x-auto"></div>
+        </div>
       </section>
       <!-- Reservations Tab (Demo) -->
       <section id="tab-reservations" class="admin-tab-section hidden">
-        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Reservations</h2>
-        <div class="text-neutral-500">(Demo section. Add your reservations management here.)</div>
+        <h2 class="text-2xl lg:text-4xl font-serif font-medium mb-4 lg:mb-6 tracking-tight">Reservations</h2>
+        <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-6 lg:p-8">
+          <div class="text-neutral-500 text-sm lg:text-base">(Demo section. Add your reservations management here.)</div>
+        </div>
       </section>
+      
       <!-- Analytics Tab (Demo) -->
       <section id="tab-analytics" class="admin-tab-section hidden">
-        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Analytics</h2>
-        <div class="text-neutral-500">(Demo section. Add your analytics here.)</div>
+        <h2 class="text-2xl lg:text-4xl font-serif font-medium mb-4 lg:mb-6 tracking-tight">Analytics</h2>
+        <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-6 lg:p-8">
+          <div class="text-neutral-500 text-sm lg:text-base">(Demo section. Add your analytics here.)</div>
+        </div>
       </section>
+      
       <!-- Settings Tab (Demo) -->
       <section id="tab-settings" class="admin-tab-section hidden">
-        <h2 class="text-4xl font-serif font-medium mb-6 tracking-tight">Settings</h2>
-        <div class="text-neutral-500">(Demo section. Add your settings here.)</div>
+        <h2 class="text-2xl lg:text-4xl font-serif font-medium mb-4 lg:mb-6 tracking-tight">Settings</h2>
+        <div class="bg-white rounded-2xl lg:rounded-3xl shadow-soft p-6 lg:p-8">
+          <div class="text-neutral-500 text-sm lg:text-base">(Demo section. Add your settings here.)</div>
+        </div>
     </section>
   </main>
   </div>
@@ -174,6 +252,36 @@
   <script src="products.js"></script>
   <script src="orders.js"></script>
   <script>
+    // Mobile menu functionality
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileClose = document.getElementById('mobile-close');
+    const sidebar = document.getElementById('sidebar');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    function openMobileMenu() {
+      sidebar.classList.add('open');
+      mobileOverlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      sidebar.classList.remove('open');
+      mobileOverlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', openMobileMenu);
+    }
+
+    if (mobileClose) {
+      mobileClose.addEventListener('click', closeMobileMenu);
+    }
+
+    if (mobileOverlay) {
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+    }
+
     // Sidebar tab navigation
     document.querySelectorAll('#sidebar-nav a').forEach(link => {
       link.addEventListener('click', function(e) {
@@ -184,6 +292,11 @@
         document.getElementById('tab-' + this.getAttribute('data-tab')).classList.remove('hidden');
         if (this.getAttribute('data-tab') === 'menu') renderAdminProducts();
         if (this.getAttribute('data-tab') === 'orders') renderAdminOrders();
+        
+        // Close mobile menu after selecting a tab
+        if (window.innerWidth < 1024) {
+          closeMobileMenu();
+        }
       });
     });
 
